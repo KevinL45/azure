@@ -1,0 +1,18 @@
+version: "1.0"
+services:
+  django:
+    image: alpine:3.17.3
+    
+  redis:
+    image: "alpine:3.17.3"
+
+# https://hub.docker.com/_/microsoft-azure-sql-edge
+# https://dev.to/cloudx/running-azure-sql-edge-on-docker-on-macos-m1-3lf5
+  sql_server:
+    # image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/azure-sql-edge
+    environment:
+    - ACCEPT_EULA=1 
+    - MSSQL_SA_PASSWORD="root"
+    ports:
+    - 57000:1433
