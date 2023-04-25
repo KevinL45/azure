@@ -8,11 +8,14 @@ services:
 
 # https://hub.docker.com/_/microsoft-azure-sql-edge
 # https://dev.to/cloudx/running-azure-sql-edge-on-docker-on-macos-m1-3lf5
+# https://hevodata.com/learn/sql-server-docker/#:~:text=Docker%20Container%20seamlessly%3A-,SQL%20Server%20Docker%20Setup%3A%20Install%20Docker%20on%20your%20System,your%20SQL%20Server%20Docker%20Instance
+  # https://hub.docker.com/_/microsoft-azure-sql-edge
   sql_server:
     # image: mcr.microsoft.com/mssql/server:2022-latest
     image: mcr.microsoft.com/azure-sql-edge
     environment:
-    - ACCEPT_EULA=1 
-    - MSSQL_SA_PASSWORD="root"
+      ACCEPT_EULA: "y"
+      MSSQL_SA_PASSWORD: "administrator_TEST"
     ports:
-    - 57000:1433
+    - 1433:1433
+    restart: always
