@@ -1,7 +1,11 @@
-version: "1.0"
+version: "3.3"
 services:
   django:
-    image: alpine:3.17.3
+    image: python:3.7
+    build: ./django/
+    ports:
+    - 8000:8000
+    command: python ./azure_project_api/manage.py runserver 0.0.0.0:8000
     
   redis:
     image: "alpine:3.17.3"
@@ -19,3 +23,30 @@ services:
     ports:
     - 1433:1433
     restart: always
+
+  # azure_cli:
+  # # https://learn.microsoft.com/en-us/cli/azure/run-azure-cli-docker
+  #   image: mcr.microsoft.com/azure-cli
+  #   volumes:
+  #     - ./deploy_django_azure_project_API.sh:/app/deploy_django_azure_project_API.sh
+  #   command: bash app/deploy_django_azure_project_API.sh
+    # restart: always
+
+# https://learn.microsoft.com/en-us/azure/container-instances/tutorial-docker-compose
+# tests
+  azure-vote-back:
+    image: mcr.microsoft.com/oss/bitnami/redis:6.0.8
+    container_name: azure-vote-back
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+        - "6379:6379"
+
+  azure-vote-front:
+    build: ./azure-voting-app-redis/azure-vote
+    image: testmachin.azurecr.io/azure-vote-front
+    container_name: azure-vote-front
+    environment:
+      REDIS: azure-vote-back
+    ports:
+        - "80:80"
