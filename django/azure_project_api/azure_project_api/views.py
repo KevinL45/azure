@@ -91,13 +91,17 @@ def delete_tag(request,id):
         return Response({'message': 'Tutorial was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['PUT','GET'])
-def update_tag(request,id):
+def update_tag(request,id,queryset=None):
     tag = Tag.objects.filter(id=id)
     if request.method == 'GET':
         serializer = TagSerializer(tag, many=True)
         return Response(serializer.data)
     if request.method == 'PUT':
-        return Response({'message': 'Tutorial was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
-
+        data = JSONParser().parse(request)
+        serializer = TagSerializer(tag,data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED) 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     

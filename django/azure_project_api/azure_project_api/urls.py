@@ -26,10 +26,13 @@ urlpatterns = [
     path('ajouter_une_photo/',views.create_photo , name="Ajouter une photo"),
     path('supprimer_une_photo/<int:id>/',views.delete_photo, name="Supprimer une photo"),
 
+
     path('liste_des_tags/',views.list_tags, name="Liste des tags"),
     path('tag/<int:id>/',views.getTag , name="Tag"),
     path('ajouter_un_tag/',views.create_tag , name="Ajouter un tag"),
     path('supprimer_un_tag/<int:id>/',views.delete_tag, name="Supprimer un tag"),
+    path('modifier_un_tag/<int:id>/',views.update_tag, name="Modifier un tag"),
+
 
 
 
