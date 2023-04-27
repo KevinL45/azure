@@ -18,8 +18,5 @@ class Photo(models.Model):
     logo = models.BooleanField(default=False)
     pictures_human = models.BooleanField(default=False)
     format_id = models.ForeignKey(Format, on_delete=models.CASCADE)
-
-class Photos_Tags(models.Model):
-    photo_id = models.ForeignKey(Photo, on_delete=models.CASCADE)
-    tag_id = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag)
 
