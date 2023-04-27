@@ -3,7 +3,7 @@ services:
   django:
     container_name: azure-django
     image: testmachin.azurecr.io/azure-django
-    build: ./django/
+    build: ./django_copy/
     ports:
     - 8000:8000
     command: python ./azure_project_api/manage.py runserver 0.0.0.0:8000
