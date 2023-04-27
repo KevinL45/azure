@@ -1,28 +1,29 @@
 version: "3.3"
 services:
   django:
-    image: python:3.7
+    container_name: azure-django
+    image: testmachin.azurecr.io/azure-django
     build: ./django/
     ports:
     - 8000:8000
     command: python ./azure_project_api/manage.py runserver 0.0.0.0:8000
     
-  redis:
-    image: "alpine:3.17.3"
+  # redis:
+  #   image: "alpine:3.17.3"
 
 # https://hub.docker.com/_/microsoft-azure-sql-edge
 # https://dev.to/cloudx/running-azure-sql-edge-on-docker-on-macos-m1-3lf5
 # https://hevodata.com/learn/sql-server-docker/#:~:text=Docker%20Container%20seamlessly%3A-,SQL%20Server%20Docker%20Setup%3A%20Install%20Docker%20on%20your%20System,your%20SQL%20Server%20Docker%20Instance
   # https://hub.docker.com/_/microsoft-azure-sql-edge
-  sql_server:
-    # image: mcr.microsoft.com/mssql/server:2022-latest
-    image: mcr.microsoft.com/azure-sql-edge
-    environment:
-      ACCEPT_EULA: "y"
-      MSSQL_SA_PASSWORD: "administrator_TEST"
-    ports:
-    - 1433:1433
-    restart: always
+  # sql_server:
+  #   # image: mcr.microsoft.com/mssql/server:2022-latest
+  #   image: mcr.microsoft.com/azure-sql-edge
+  #   environment:
+  #     ACCEPT_EULA: "y"
+  #     MSSQL_SA_PASSWORD: "administrator_TEST"
+  #   ports:
+  #   - 1433:1433
+  #   restart: always
 
   # azure_cli:
   # # https://learn.microsoft.com/en-us/cli/azure/run-azure-cli-docker
