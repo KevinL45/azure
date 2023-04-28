@@ -1,74 +1,27 @@
-## Compose sample 
+# Angular
 
-### Use with Docker Development Environments
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
 
-You can open this sample in the Dev Environments feature of Docker Desktop version 4.12 or later.
+## Development server
 
-[Open in Docker Dev Environments <img src="../open_in_new.svg" alt="Open in Docker Dev Environments" align="top"/>](https://open.docker.com/dashboard/dev-envs?url=https://github.com/docker/awesome-compose/tree/master/angular)
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-### Angular service
+## Code scaffolding
 
-Project structure:
-```
-.
-├── angular
-│   ├── Dockerfile
-│   ├── ...
-│   ├── ...
-│   ....
-└── compose.yaml
-```
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-[_compose.yaml_](compose.yaml)
-```
-services:
-  web:
-    build: angular
-    ports:
-    - 4200:4200
-    ...
+## Build
 
-```
-The compose file defines an application with one service `angular`. The image for the service is built with the Dockerfile inside the `angular` directory (build parameter).
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-When deploying the application, docker compose maps the container port 4200 to the same port on the host as specified in the file.
-Make sure port 4200 is not being used by another container, otherwise the port should be changed.
+## Running unit tests
 
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Deploy with docker compose
+## Running end-to-end tests
 
-```
-$ docker compose up -d
-Creating network "angular_default" with the default driver
-Building angular
-Step 1/7 : FROM node:10
-10: Pulling from library/node
-c0c53f743a40: Pull complete
-...
-...
-Successfully built efea5cef6851
-Successfully tagged angular_web:latest
-WARNING: Image for service web was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
-Creating angular_web_1 ... done
-```
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
+## Further help
 
-## Expected result
-
-Listing containers must show a container running and the port mapping as below:
-```
-$ docker ps
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
-6884c228388e        angular_web         "docker-entrypoint.s…"   42 seconds ago      Up 36 seconds       0.0.0.0:4200->4200/tcp angular_web_1
-
-```
-
-After the application starts, navigate to `http://localhost:4200` in your web browser.
-
-![page](output.png)
-
-Stop and remove the container
-
-```
-$ docker compose down
-```
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
