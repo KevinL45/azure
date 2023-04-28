@@ -23,16 +23,16 @@ urlpatterns = [
 
     path('photos/',views.list_photos, name="Liste des photos"),
     path('photo/<int:id>/',views.getPhoto , name="Photo"),
-    path('ajouter_une_photo/',views.create_photo , name="Ajouter une photo"),
-    path('supprimer_une_photo/<int:id>/',views.delete_photo, name="Supprimer une photo"),
-    path('modifier_une_photo/<int:id>/',views.update_photo, name="Modifier une photo"),
+    path('add_photo/',views.create_photo , name="Ajouter une photo"),
+    path('remove_photo/<int:id>/',views.delete_photo, name="Supprimer une photo"),
+    path('update_photo/<int:id>/',views.update_photo, name="Modifier une photo"),
 
 
     path('tags/',views.list_tags, name="Liste des tags"),
     path('tag/<int:id>/',views.getTag , name="Tag"),
-    path('ajouter_un_tag/',views.create_tag , name="Ajouter un tag"),
-    path('supprimer_un_tag/<int:id>/',views.delete_tag, name="Supprimer un tag"),
-    path('modifier_un_tag/<int:id>/',views.update_tag, name="Modifier un tag"),
+    path('add_tag/',views.create_tag , name="Ajouter un tag"),
+    path('remove_tag/<int:id>/',views.delete_tag, name="Supprimer un tag"),
+    path('update_tag/<int:id>/',views.update_tag, name="Modifier un tag"),
 
 
 
