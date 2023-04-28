@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterOutlet} from "@angular/router";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormPictureUploadComponent } from './form-picture-upload/form-picture-upload.component';
 
 
 @Component({
@@ -9,7 +10,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   imports: [
     RouterOutlet,
     RouterLink,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    FormPictureUploadComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
