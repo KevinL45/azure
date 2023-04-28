@@ -25,6 +25,7 @@
               "projects/azure_project_front_api/src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/azure_project_front_api/src/styles.css"
             ],
             "scripts": []
@@ -87,6 +88,7 @@
               "projects/azure_project_front_api/src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/azure_project_front_api/src/styles.css"
             ],
             "scripts": []
