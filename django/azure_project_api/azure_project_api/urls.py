@@ -19,15 +19,16 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('liste_des_formats/',views.list_formats, name="Liste des formats"),
+    path('formats/',views.list_formats, name="Liste des formats"),
 
-    path('liste_des_photos/',views.list_photos, name="Liste des photos"),
+    path('photos/',views.list_photos, name="Liste des photos"),
     path('photo/<int:id>/',views.getPhoto , name="Photo"),
     path('ajouter_une_photo/',views.create_photo , name="Ajouter une photo"),
     path('supprimer_une_photo/<int:id>/',views.delete_photo, name="Supprimer une photo"),
+    path('modifier_une_photo/<int:id>/',views.update_photo, name="Modifier une photo"),
 
 
-    path('liste_des_tags/',views.list_tags, name="Liste des tags"),
+    path('tags/',views.list_tags, name="Liste des tags"),
     path('tag/<int:id>/',views.getTag , name="Tag"),
     path('ajouter_un_tag/',views.create_tag , name="Ajouter un tag"),
     path('supprimer_un_tag/<int:id>/',views.delete_tag, name="Supprimer un tag"),
