@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImagesListComponent } from './images-list.component';
+import { ImageSearchComponent } from './image-search.component';
 
-describe('ImagesListComponent', () => {
-  let component: ImagesListComponent;
-  let fixture: ComponentFixture<ImagesListComponent>;
+describe('ImageSearchComponent', () => {
+  let component: ImageSearchComponent;
+  let fixture: ComponentFixture<ImageSearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ ImagesListComponent ]
+      declarations: [ ImageSearchComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ImagesListComponent);
+    fixture = TestBed.createComponent(ImageSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
