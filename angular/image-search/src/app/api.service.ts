@@ -14,18 +14,18 @@ export class ApiService {
     const formData: FormData = new FormData();
     formData.append('image', imageFile);
 
-    return this.http.post(`${this.apiUrl}/upload`, formData);
+    return this.http.post(`${this.apiUrl}/images-test/`, formData);
   }
 
   searchImages(criteria: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/search?criteria=${criteria}`);
+    return this.http.get(`${this.apiUrl}/images-test?filter=${criteria}`);
   }
 
   updateImageProperties(image: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/images/${image.id}`, image);
+    return this.http.put(`${this.apiUrl}/images-test/${image.id}`, image);
   }
 
   deleteImage(imageId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/images/${imageId}`);
+    return this.http.delete(`${this.apiUrl}/images-test/${imageId}`);
   }
 }
