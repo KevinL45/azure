@@ -6,18 +6,20 @@ import { AppComponent } from './app.component';
 import { ImageUploadComponent } from './components/image-upload/image-upload.component';
 import { ImageSearchComponent } from './components/image-search/image-search.component';
 import { FormsModule } from "@angular/forms";
+import { FormPictureUploadComponent } from './components/form-picture-upload/form-picture-upload.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ImageUploadComponent,
-    ImageSearchComponent
+    ImageSearchComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    FormPictureUploadComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
