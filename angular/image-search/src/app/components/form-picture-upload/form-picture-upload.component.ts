@@ -4,6 +4,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormBuilder } from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import { StorageApiService } from 'src/app/storage-api.service';
 
 @Component({
   standalone: true,
@@ -22,7 +23,7 @@ export class FormPictureUploadComponent {
 
   tags: any[] =[]
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private storageApiService: StorageApiService) {
 
   }
 
@@ -50,6 +51,10 @@ export class FormPictureUploadComponent {
     // Process checkout data here
     console.warn('Your order has been submitted', this.pictureUploadForm.value);
     this.pictureUploadForm.reset();
+  }
+
+  testApi(): void {
+    // this.storageApiService.listFiles()
   }
 
 
