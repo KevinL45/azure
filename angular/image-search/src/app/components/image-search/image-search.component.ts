@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../api.service';
+import { NgOptimizedImage } from '@angular/common'
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-image-search',
@@ -9,8 +11,24 @@ import { ApiService } from '../../api.service';
 export class ImageSearchComponent {
   searchCriteria: string = '';
   searchResults: any[] = [];
+  images: any[] = [];
 
   constructor(private apiService: ApiService) { }
+
+
+  // Service to show get images: -- WORKING!
+  ngOnInit(): void {
+    this.apiService.getImages().subscribe(
+      (response: any[]) => {
+        this.images = response;
+        console.log(this.images);
+      },
+      (error) => {
+        console.error('Error fetching images:', error);
+      }
+    );
+  }
+
 
   searchImages() {
     if (this.searchCriteria.trim() !== '') {

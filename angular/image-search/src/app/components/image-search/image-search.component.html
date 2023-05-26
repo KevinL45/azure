@@ -3,15 +3,11 @@
   <input type="text" [(ngModel)]="searchCriteria" (input)="searchImages()" placeholder="Enter search criteria">
 </div>
 
-<div *ngIf="searchResults.length > 0">
-  <h3>Search Results:</h3>
-  <div class="image-list">
-    <div class="image-item" *ngFor="let image of searchResults">
-      <img [src]="image.url" [alt]="image.description">
-      <div class="image-properties">
-        <input type="text" [(ngModel)]="image.description" (input)="updateImageProperties(image)">
-        <button (click)="deleteImage(image)">Delete</button>
-      </div>
+
+  <div class="image-grid">
+    <div class="image-card" *ngFor="let image of images">
+      <img [src]="image.url" alt="Cat Image">
     </div>
   </div>
-</div>
+
+

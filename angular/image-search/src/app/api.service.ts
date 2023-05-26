@@ -6,9 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://api.example.com'; // Replace with your API URL
-
+  // private apiUrl = 'https://api.example.com'; // Replace with your API URL
+  private apiUrl = 'https://api.thecatapi.com/v1';
+  private apiKey = ''; //The Cat API
+  private limit = 10;
   constructor(private http: HttpClient) { }
+
+  getImages(): Observable<any> {
+    const url = `${this.apiUrl}/images/search?limit=${this.limit}&api_key=${this.apiKey}`;
+    return this.http.get(url);
+  }
 
   uploadImage(imageFile: File): Observable<any> {
     const formData: FormData = new FormData();
@@ -18,7 +25,7 @@ export class ApiService {
   }
 
   searchImages(criteria: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/images-test?filter=${criteria}`);
+    return this.http.get(`${this.apiUrl}/images`);
   }
 
   updateImageProperties(image: any): Observable<any> {
