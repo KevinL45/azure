@@ -3,30 +3,29 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "azure_project_front_api": {
+    "image-search": {
       "projectType": "application",
       "schematics": {},
-      "root": "projects/azure_project_front_api",
-      "sourceRoot": "projects/azure_project_front_api/src",
+      "root": "",
+      "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/azure_project_front_api",
-            "index": "projects/azure_project_front_api/src/index.html",
-            "main": "projects/azure_project_front_api/src/main.ts",
+            "outputPath": "dist/image-search",
+            "index": "src/index.html",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
-            "tsConfig": "projects/azure_project_front_api/tsconfig.app.json",
+            "tsConfig": "tsconfig.app.json",
             "assets": [
-              "projects/azure_project_front_api/src/favicon.ico",
-              "projects/azure_project_front_api/src/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/azure_project_front_api/src/styles.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -61,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "azure_project_front_api:build:production"
+              "browserTarget": "image-search:build:production"
             },
             "development": {
-              "browserTarget": "azure_project_front_api:build:development"
+              "browserTarget": "image-search:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "azure_project_front_api:build"
+            "browserTarget": "image-search:build"
           }
         },
         "test": {
@@ -82,14 +81,13 @@
               "zone.js",
               "zone.js/testing"
             ],
-            "tsConfig": "projects/azure_project_front_api/tsconfig.spec.json",
+            "tsConfig": "tsconfig.spec.json",
             "assets": [
-              "projects/azure_project_front_api/src/favicon.ico",
-              "projects/azure_project_front_api/src/assets"
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/azure_project_front_api/src/styles.css"
+              "src/styles.css"
             ],
             "scripts": []
           }
