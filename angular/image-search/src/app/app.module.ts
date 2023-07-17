@@ -7,6 +7,9 @@ import { ImageUploadComponent } from './components/image-upload/image-upload.com
 import { ImageSearchComponent } from './components/image-search/image-search.component';
 import { FormsModule } from "@angular/forms";
 import { FormPictureUploadComponent } from './components/form-picture-upload/form-picture-upload.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { FormPictureUploadComponent } from './components/form-picture-upload/for
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    FormPictureUploadComponent
+    FormPictureUploadComponent,
+    MatChipsModule,
+    MatSelectModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
