@@ -10,7 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+
+import os
 from pathlib import Path
+# https://www.twilio.com/fr/blog/variables-environnement-python
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,15 +82,25 @@ WSGI_APPLICATION = 'azure_project_api.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "mssql",
-        "NAME": "Pomona",
-        "USER": "kevinl45",
-        "PASSWORD": "kasthorimie45:",
-        "HOST": "pomona-projet.database.windows.net",
-        "PORT": "1433",
-    },
-}
+     'default': {
+         'ENGINE': os.getenv('ENGINE'),
+         'NAME': os.getenv('NAME'),
+         'USER': os.getenv('USER'),
+         'PASSWORD': os.getenv('PASSWORD'),
+         'HOST': os.getenv('HOST'),
+         'PORT': os.getenv('PORT')
+     },
+ }
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "mssql",
+#         "NAME": "Pomona",
+#         "USER": "kevinl45",
+#         "PASSWORD": "kasthorimie45:",
+#         "HOST": "pomona-projet.database.windows.net",
+#         "PORT": "1433",
+#     },
+# }
 
 
 # Password validation
