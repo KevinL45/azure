@@ -34,6 +34,10 @@ urlpatterns = [
     path('remove_tag/<int:id>/',views.delete_tag, name="Supprimer un tag"),
     path('update_tag/<int:id>/',views.update_tag, name="Modifier un tag"),
 
+    path('blobs/pictures/<str:blob_name>/',views.get_pictures, name="get pictures from Azure blob storage"),
+    path('blobs/pictures/',views.get_pictures_blobs, name="get pictures list from Azure blob storage"),
+
+
 
 
 

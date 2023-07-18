@@ -1,11 +1,12 @@
 from rest_framework import status
+
+from .pictures_service import PictureService
+
 from .serializer import *
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser 
-
-
-
+from rest_framework.parsers import JSONParser
+import json
 
 @api_view(['GET'])
 def list_formats(request):
@@ -118,5 +119,18 @@ def update_tag(request,id):
             serializer.save()
             return JsonResponse(serializer.data, status=status.HTTP_201_CREATED, safe=False) 
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST, safe=False)
-    
-    
+
+# TO TEST WIP
+@api_view(['GET'])
+def get_pictures(request, blob_name):
+        pictureService = PictureService()
+        pictureService.download_blob(blob_name)
+        return JsonResponse("hello", safe=False) 
+
+# //OK
+@api_view(['GET'])
+def get_pictures_blobs(request):
+        pictureService = PictureService()
+        pictures_blob = pictureService.list_blobs()
+        pictures_blob_stringified = json.dumps({"pictures_blob" : pictures_blob})
+        return HttpResponse(pictures_blob_stringified, "application/json")
