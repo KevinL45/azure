@@ -1,6 +1,7 @@
 from rest_framework import status
 
 from .pictures_service import PictureService
+from .computer_vision_service import ComputerVision
 
 from .serializer import *
 from django.http import HttpResponse, JsonResponse
@@ -134,3 +135,11 @@ def get_pictures_blobs(request):
         pictures_blob = pictureService.list_blobs()
         pictures_blob_stringified = json.dumps({"pictures_blob" : pictures_blob})
         return HttpResponse(pictures_blob_stringified, "application/json")
+
+@api_view(['GET'])
+def computer_vision_analyze(request):
+        computer_vision = ComputerVision()
+        picture_tags_analyzed = computer_vision.analyze_picture()
+        print(picture_tags_analyzed)
+        # pictures_tags_stringified = json.dumps({"pictures_tags" : picture_tags_analyzed})
+        return HttpResponse("HOLA", "application/json")
