@@ -40,7 +40,7 @@ urlpatterns = [
     path('upload/pictures/', views.upload_pictures, name='upload the picture given as parameters'),
 
 
-    path('computer-vision/analyze', views.computer_vision_analyze, name='analyze the picture given as parametre and return tags found')
+    path('computer-vision/analyze/<int:id>/', views.computer_vision_analyze, name='analyze the picture given as parametre and return tags found')
     
 
 
