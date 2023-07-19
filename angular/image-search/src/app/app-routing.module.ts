@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import {ImageSearchComponent} from "./components/image-search/image-search.component";
 import {ImageUploadComponent} from "./components/image-upload/image-upload.component";
 import { FormPictureUploadComponent } from './components/form-picture-upload/form-picture-upload.component';
+import { HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'search', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'search', component: ImageSearchComponent },
   // { path: 'upload', component: ImageUploadComponent },
   { path: 'upload', component: FormPictureUploadComponent },
