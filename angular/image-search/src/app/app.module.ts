@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule} from "@angular/common/http";
 
@@ -12,7 +12,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './components/home/home.component';
-
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -29,8 +29,10 @@ import { HomeComponent } from './components/home/home.component';
     MatChipsModule,
     MatSelectModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
