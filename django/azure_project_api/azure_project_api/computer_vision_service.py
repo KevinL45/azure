@@ -40,8 +40,8 @@ class ComputerVision:
         # vision_source = visionsdk.VisionSource(filename="sample.jpg")
         read_image_url = "https://eu-images.contentstack.com/v3/assets/blt5004e64d3579c43f/bltef565a6da4bc399a/649c474f1cec001670d8938b/MxBo_BIGMAC.png?auto=webp&width=1280&disable=upscale%201x"
         # vision_source = visionsdk.VisionSource(url="https://media.istockphoto.com/id/675804830/photo/beige-hamster.jpg?s=612x612&w=0&k=20&c=e4P9Z3U3PVwtNEMZUCkoDkBrHr9E0XDxk9fZdDKZHZ4=")
-        vision_source = visionsdk.VisionSource(url="https://www.imie-paris.fr/embauchez-moi/Image/Serge_fond.png")
-        # vision_source = visionsdk.VisionSource(url=read_image_url)
+        # vision_source = visionsdk.VisionSource(url="https://www.imie-paris.fr/embauchez-moi/Image/Serge_fond.png")
+        vision_source = visionsdk.VisionSource(url=read_image_url)
 
         # Or, instead of the above, specify a publicly accessible image URL to analyze. For example:
         # image_url = "https://aka.ms/azai/vision/image-analysis-sample.jpg"

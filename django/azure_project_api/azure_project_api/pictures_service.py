@@ -3,16 +3,14 @@
 import io
 import os
 from azure.storage.blob import BlobServiceClient
-from azure.storage.blob.aio import BlobClient
 from dotenv import load_dotenv
 
 class PictureService:
 
     def __init__(self):
         load_dotenv()
-        url_test = os.getenv("BLOB_STORAGE_URL")
-        print(url_test)
-        self.service = service = BlobServiceClient(account_url=url_test, credential=os.getenv("AZURE_KEY_BLOB_STORAGE_KEY_2"))
+        self.container_url = os.getenv("BLOB_STORAGE_URL")
+        self.service = service = BlobServiceClient(account_url=self.container_url, credential=os.getenv("AZURE_KEY_BLOB_STORAGE_KEY_2"))
 
     def list_blobs(self):
         # containers = self.service.list_containers()
@@ -38,4 +36,15 @@ class PictureService:
         num_bytes = blob_client.download_blob().readinto(stream)
         print(f"Number of bytes: {num_bytes}")
 
-    
+    def get_blobs_paths(self, blob_number_max:int):
+        result = []
+        container_client = self.service.get_container_client("pictures")
+        container_blob_names = container_client.list_blobs()
+        # print(container_blob_names)
+        # for blob_name in container_blob_names:
+        #     print(blob_name)
+        data_mapped = map(lambda x: self.container_url + x['container']+"/" + x['name'], container_blob_names)
+
+        for data in data_mapped:
+            result.append(data)
+        return result[:blob_number_max] if result is not None else []

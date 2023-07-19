@@ -137,6 +137,15 @@ def get_pictures_blobs(request):
         return HttpResponse(pictures_blob_stringified, "application/json")
 
 @api_view(['GET'])
+def get_pictures_blobs_path(request, blob_number_max:int):
+        pictureService = PictureService()
+        pictures_blob = pictureService.get_blobs_paths(blob_number_max)
+        pictures_blob_stringified = json.dumps({"pictures_blob" : pictures_blob})
+        return HttpResponse(pictures_blob_stringified, "application/json")
+
+
+
+@api_view(['GET'])
 def computer_vision_analyze(request):
         computer_vision = ComputerVision()
         picture_tags_analyzed = computer_vision.analyze_picture()
