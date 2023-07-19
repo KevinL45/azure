@@ -52,9 +52,24 @@ class PictureService:
         for data in data_mapped:
             result.append(data)
         return result[:blob_number_max] if result is not None else []
+<<<<<<< HEAD
 
     def upload_blob(self, blob, name):
         container_client: ContainerClient  = self.service.get_container_client("pictures")
         blob_client: BlobClient = container_client.upload_blob(str(uuid.uuid4()) , blob, content_settings = ContentSettings(content_type='image/jpeg', content_disposition='inline'))
         blob_client_name =  blob_client.blob_name
         return blob_client_name
+=======
+    
+    def get_paths(self, id:int):
+        result = []
+        container_client = self.service.get_container_client("pictures")
+        container_blob_names = container_client.list_blobs()
+        # print(container_blob_names)
+        # for blob_name in container_blob_names:
+        #     print(blob_name)
+        data_mapped = map(lambda x: self.container_url + x['container']+"/" + x['name'], container_blob_names)
+        for data in data_mapped:
+            result.append(data)
+        return result[id] if result is not None else []
+>>>>>>> 96b930409f1875cbe0c96eda10a8494affa9f735
