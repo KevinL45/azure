@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule} from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { FormPictureUploadComponent } from './components/form-picture-upload/for
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     AppComponent,
     ImageUploadComponent,
     ImageSearchComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
     FormPictureUploadComponent,
     MatChipsModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
