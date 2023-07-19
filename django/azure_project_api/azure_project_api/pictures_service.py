@@ -48,3 +48,15 @@ class PictureService:
         for data in data_mapped:
             result.append(data)
         return result[:blob_number_max] if result is not None else []
+    
+    def get_paths(self, id:int):
+        result = []
+        container_client = self.service.get_container_client("pictures")
+        container_blob_names = container_client.list_blobs()
+        # print(container_blob_names)
+        # for blob_name in container_blob_names:
+        #     print(blob_name)
+        data_mapped = map(lambda x: self.container_url + x['container']+"/" + x['name'], container_blob_names)
+        for data in data_mapped:
+            result.append(data)
+        return result[id] if result is not None else []
