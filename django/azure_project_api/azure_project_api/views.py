@@ -128,6 +128,36 @@ def get_pictures(request, blob_name):
         pictureService.download_blob(blob_name)
         return JsonResponse("hello", safe=False) 
 
+@api_view(['POST'])
+def upload_pictures(request):
+    pictureService = PictureService()
+    # local_path = "./data"
+    file = request.FILES['file']
+    print(file.name)
+    picture_uploaded = pictureService.upload_blob(file.read(), file.name)
+# os.mkdir(local_path)
+
+# # Create a file in the local data directory to upload and download
+# local_file_name = str(uuid.uuid4()) + ".txt"
+# upload_file_path = os.path.join(local_path, local_file_name)
+
+# # Write text to the file
+# file = open(file=upload_file_path, mode='w')
+# file.write("Hello, World!")
+# file.close()
+
+# Create a blob client using the local file name as the name for the blob
+# blob_client = blob_service_client.get_blob_client(container=container_name, blob=local_file_name)
+
+# print("\nUploading to Azure Storage as blob:\n\t" + local_file_name)
+
+# Upload the created file
+# with open(file=upload_file_path, mode="rb") as data:
+#     blob_client.upload_blob(data)
+#         uploaded_file = request.FILES['file'] # data from request
+#         print(uploaded_file)
+    return JsonResponse(picture_uploaded, safe=False) 
+
 # //OK
 @api_view(['GET'])
 def get_pictures_blobs(request):
@@ -152,3 +182,4 @@ def computer_vision_analyze(request):
         print(picture_tags_analyzed)
         # pictures_tags_stringified = json.dumps({"pictures_tags" : picture_tags_analyzed})
         return HttpResponse("HOLA", "application/json")
+

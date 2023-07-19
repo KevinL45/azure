@@ -2,7 +2,10 @@
 
 import io
 import os
-from azure.storage.blob import BlobServiceClient
+import uuid
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from azure.storage.blob import ContentSettings
+
 from dotenv import load_dotenv
 
 class PictureService:
@@ -22,6 +25,7 @@ class PictureService:
             result.append(blob_name)
         return result if result is not None else []
 
+    # *WIP
     def download_blob(self, blob_name_to_upload):
         # containers = self.service.list_containers()
         container_client = self.service.get_container_client("pictures")
@@ -48,3 +52,9 @@ class PictureService:
         for data in data_mapped:
             result.append(data)
         return result[:blob_number_max] if result is not None else []
+
+    def upload_blob(self, blob, name):
+        container_client: ContainerClient  = self.service.get_container_client("pictures")
+        blob_client: BlobClient = container_client.upload_blob(str(uuid.uuid4()) , blob, content_settings = ContentSettings(content_type='image/jpeg', content_disposition='inline'))
+        blob_client_name =  blob_client.blob_name
+        return blob_client_name
