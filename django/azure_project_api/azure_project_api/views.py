@@ -183,9 +183,4 @@ def computer_vision_analyze(request, id:int):
         picture_tags_analyzed = computer_vision.analyze_picture(url)
         print(picture_tags_analyzed)
         # pictures_tags_stringified = json.dumps({"pictures_tags" : picture_tags_analyzed})
-<<<<<<< HEAD
-        return HttpResponse("HOLA", "application/json")
-
-=======
         return HttpResponse(url, "application/json")
->>>>>>> 96b930409f1875cbe0c96eda10a8494affa9f735
