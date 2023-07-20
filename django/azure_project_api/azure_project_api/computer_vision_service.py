@@ -122,7 +122,7 @@ class ComputerVision:
             if result.tags is not None:
                 print(" Tags:")
                 for tag in result.tags:
-                    result_tags.append(tag)
+                    result_tags.append({"name":tag.name, "confidence": tag.confidence})
                     print("   '{}', Confidence {:.4f}".format(tag.name, tag.confidence))
 
             # if result.people is not None:
