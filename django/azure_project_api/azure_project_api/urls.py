@@ -38,6 +38,7 @@ urlpatterns = [
     path('blobs/pictures/paths/<int:blob_number_max>/',views.get_pictures_blobs_path, name="get pictures path to render them from Azure blob storage"),
     path('blobs/pictures/',views.get_pictures_blobs, name="get pictures list from Azure blob storage"),
     path('upload/pictures/', views.upload_pictures, name='upload the picture given as parameters'),
+    # path('download/pictures/<str:UUID>', views.download_pictures, name='upload the picture given as parameters'),
 
     path('computer-vision/analyze/<str:name>/', views.computer_vision_analyze, name='analyze the picture given as parametre and return tags found')
     

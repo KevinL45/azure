@@ -130,33 +130,27 @@ def get_pictures(request, blob_name):
 
 @api_view(['POST'])
 def upload_pictures(request):
+    pictures_uploaded_UUIDs = []
     pictureService = PictureService()
     # local_path = "./data"
-    file = request.FILES['file']
-    print(file.name)
-    picture_uploaded = pictureService.upload_blob(file.read(), file.name)
-# os.mkdir(local_path)
+    print(len(request.FILES.getlist('files')))
+    files = request.FILES.getlist('files')
+    # for ile in files:
+        # print(file.name)
+    pictures_uploaded_UUIDs = pictureService.upload_files(files)
+    return JsonResponse(pictures_uploaded_UUIDs, safe=False) 
 
-# # Create a file in the local data directory to upload and download
-# local_file_name = str(uuid.uuid4()) + ".txt"
-# upload_file_path = os.path.join(local_path, local_file_name)
-
-# # Write text to the file
-# file = open(file=upload_file_path, mode='w')
-# file.write("Hello, World!")
-# file.close()
-
-# Create a blob client using the local file name as the name for the blob
-# blob_client = blob_service_client.get_blob_client(container=container_name, blob=local_file_name)
-
-# print("\nUploading to Azure Storage as blob:\n\t" + local_file_name)
-
-# Upload the created file
-# with open(file=upload_file_path, mode="rb") as data:
-#     blob_client.upload_blob(data)
-#         uploaded_file = request.FILES['file'] # data from request
-#         print(uploaded_file)
-    return JsonResponse(picture_uploaded, safe=False) 
+@api_view(['POST'])
+def download_pictures(request):
+    pictures_uploaded = []
+    pictureService = PictureService()
+    # local_path = "./data"
+    files = request.FILES['files']
+    for file in files:
+        print(file.name)
+        picture_uploaded = pictureService.upload_blob(file.read(), file.name)
+        pictures_uploaded.append(picture_uploaded)
+        
 
 # //OK
 @api_view(['GET'])

@@ -14,6 +14,7 @@ class PictureService:
         load_dotenv()
         self.container_url = os.getenv("BLOB_STORAGE_URL")
         self.service = service = BlobServiceClient(account_url=self.container_url, credential=os.getenv("AZURE_KEY_BLOB_STORAGE_KEY_2"))
+        self.container_client: ContainerClient  = self.service.get_container_client("pictures")
 
     def list_blobs(self):
         # containers = self.service.list_containers()
@@ -53,11 +54,15 @@ class PictureService:
             result.append(data)
         return result[:blob_number_max] if result is not None else []
 
-    def upload_blob(self, blob, name):
-        container_client: ContainerClient  = self.service.get_container_client("pictures")
-        blob_client: BlobClient = container_client.upload_blob(str(uuid.uuid4()) , blob, content_settings = ContentSettings(content_type='image/jpeg', content_disposition='inline'))
-        blob_client_name =  blob_client.blob_name
-        return blob_client_name
+    def upload_files(self, files):
+        file_uploaded_UUIDs = []
+        if files is not None and len(files) > 0:
+            for file in files:
+                blob = file.read()
+                blob_client: BlobClient = self.container_client.upload_blob(str(uuid.uuid4()), blob, content_settings = ContentSettings(content_type='image/jpeg', content_disposition='inline'))
+                file_uploaded_UUID = blob_client.blob_name
+                file_uploaded_UUIDs.append(file_uploaded_UUID)
+        return file_uploaded_UUIDs
     
     def get_path(self, name):
         url = self.container_url+"pictures/"+name
