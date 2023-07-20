@@ -4,26 +4,11 @@
 
 <div class="container">
 
-  <div class="row">
-    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-      <img
-        src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt="Boat on Calm Water"
-      />
-
-      <img
-        src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
-        class="w-100 shadow-1-strong rounded mb-4"
-        alt="Wintry Mountain Landscape"
-      />
-    </div>
-  </div>
   <div class="carousel flex-fill">
     <ngb-carousel *ngIf="images">
       <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img [src]="images[0]" alt="Random first slide" />
+        <div class="picsum-img-wrapper img-fluid">
+          <img class="img-fluid max-width: 100% height:auto" [src]="images[0]" alt="Random first slide" />
         </div>
         <div class="carousel-caption">
           <h3>10 seconds between slides...</h3>
@@ -31,7 +16,7 @@
         </div>
       </ng-template>
       <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
+        <div class="picsum-img-wrapper img-fluid">
           <img [src]="images[1]" alt="Random second slide" />
         </div>
         <div class="carousel-caption">
@@ -40,20 +25,11 @@
         </div>
       </ng-template>
       <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
+        <div class="picsum-img-wrapper img-fluid">
           <img [src]="images[2]" alt="Random third slide" />
         </div>
         <div class="carousel-caption">
           <h3>No keyboard...</h3>
-          <p>This carousel uses customized default values.</p>
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <div class="picsum-img-wrapper">
-          <img [src]="images[3]" alt="Random fourth slide" />
-        </div>
-        <div class="carousel-caption">
-          <h3>And no wrap after last slide.</h3>
           <p>This carousel uses customized default values.</p>
         </div>
       </ng-template>
