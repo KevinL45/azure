@@ -1,0 +1,28 @@
+
+[
+  {
+    "model": "azure_project_api.tag",
+    "fields": {
+      "name": "test"
+    }
+  },
+  {
+    "model": "azure_project_api.tag",
+    "fields": {
+      "name": "test_2"
+    }
+  },
+
+  {
+    "model": "azure_project_api.format",
+    "fields": {
+      "name": "landscape"
+    }
+  },
+  {
+    "model": "azure_project_api.format",
+    "fields": {
+      "name": "portrait"
+    }
+  }
+]
