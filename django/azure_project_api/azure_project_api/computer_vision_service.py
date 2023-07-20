@@ -31,6 +31,9 @@ class ComputerVision:
         self.computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
     def analyze_picture(self, url):
+
+
+        # url = https://pomonastorage.blob.core.windows.net/pictures/Cheesecake.jpg
         result_tags = []
         subscription_key = os.environ["VISION_KEY"]
         endpoint = os.environ["VISION_ENDPOINT"]
@@ -38,11 +41,10 @@ class ComputerVision:
 
         # Specify the image file on disk to analyze. sample.jpg is a good example to show most features
         # vision_source = visionsdk.VisionSource(filename="sample.jpg")
-        # read_image_url = "https://eu-images.contentstack.com/v3/assets/blt5004e64d3579c43f/bltef565a6da4bc399a/649c474f1cec001670d8938b/MxBo_BIGMAC.png?auto=webp&width=1280&disable=upscale%201x"
-        read_image_url = url
+        read_image_url = "https://eu-images.contentstack.com/v3/assets/blt5004e64d3579c43f/bltef565a6da4bc399a/649c474f1cec001670d8938b/MxBo_BIGMAC.png?auto=webp&width=1280&disable=upscale%201x"
         # vision_source = visionsdk.VisionSource(url="https://media.istockphoto.com/id/675804830/photo/beige-hamster.jpg?s=612x612&w=0&k=20&c=e4P9Z3U3PVwtNEMZUCkoDkBrHr9E0XDxk9fZdDKZHZ4=")
         # vision_source = visionsdk.VisionSource(url="https://www.imie-paris.fr/embauchez-moi/Image/Serge_fond.png")
-        vision_source = visionsdk.VisionSource(url=read_image_url)
+        vision_source = visionsdk.VisionSource(url=url)
 
         # Or, instead of the above, specify a publicly accessible image URL to analyze. For example:
         # image_url = "https://aka.ms/azai/vision/image-analysis-sample.jpg"
@@ -61,7 +63,7 @@ class ComputerVision:
             # visionsdk.ImageAnalysisFeature.DENSE_CAPTIONS |
             # visionsdk.ImageAnalysisFeature.OBJECTS |
             # visionsdk.ImageAnalysisFeature.PEOPLE |
-            # visionsdk.ImageAnalysisFeature.TEXT |
+            visionsdk.ImageAnalysisFeature.TEXT |
             visionsdk.ImageAnalysisFeature.TAGS
         )
 
@@ -99,9 +101,9 @@ class ComputerVision:
         # Checks result.
         if result.reason == visionsdk.ImageAnalysisResultReason.ANALYZED:
 
-            # print(" Image height: {}".format(result.image_height))
-            # print(" Image width: {}".format(result.image_width))
-            # print(" Model version: {}".format(result.model_version))
+            print(" Image height: {}".format(result.image_height))
+            print(" Image width: {}".format(result.image_width))
+            print(" Model version: {}".format(result.model_version))
 
             # if result.caption is not None:
             #     print(" Caption:")
@@ -134,22 +136,22 @@ class ComputerVision:
             #         print("   Aspect ratio {}: Crop suggestion {}"
             #             .format(crop_suggestion.aspect_ratio, crop_suggestion.bounding_box))
 
-            # if result.text is not None:
-            #     print(" Text:")
-            #     for line in result.text.lines:
-            #         points_string = "{" + ", ".join([str(int(point)) for point in line.bounding_polygon]) + "}"
-            #         print("   Line: '{}', Bounding polygon {}".format(line.content, points_string))
-            #         for word in line.words:
-            #             points_string = "{" + ", ".join([str(int(point)) for point in word.bounding_polygon]) + "}"
-            #             print("     Word: '{}', Bounding polygon {}, Confidence {:.4f}"
-            #                 .format(word.content, points_string, word.confidence))
+            if result.text is not None:
+                print(" Text:")
+                for line in result.text.lines:
+                    points_string = "{" + ", ".join([str(int(point)) for point in line.bounding_polygon]) + "}"
+                    print("   Line: '{}', Bounding polygon {}".format(line.content, points_string))
+                    for word in line.words:
+                        points_string = "{" + ", ".join([str(int(point)) for point in word.bounding_polygon]) + "}"
+                        print("     Word: '{}', Bounding polygon {}, Confidence {:.4f}"
+                            .format(word.content, points_string, word.confidence))
 
-            # result_details = visionsdk.ImageAnalysisResultDetails.from_result(result)
-            # print(" Result details:")
-            # print("   Image ID: {}".format(result_details.image_id))
-            # print("   Result ID: {}".format(result_details.result_id))
-            # print("   Connection URL: {}".format(result_details.connection_url))
-            # print("   JSON result: {}".format(result_details.json_result))
+            result_details = visionsdk.ImageAnalysisResultDetails.from_result(result)
+            print(" Result details:")
+            print("   Image ID: {}".format(result_details.image_id))
+            print("   Result ID: {}".format(result_details.result_id))
+            print("   Connection URL: {}".format(result_details.connection_url))
+            print("   JSON result: {}".format(result_details.json_result))
 
         else:
 
