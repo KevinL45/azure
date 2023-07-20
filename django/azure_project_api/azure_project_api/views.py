@@ -176,9 +176,9 @@ def get_pictures_blobs_path(request, blob_number_max:int):
 
 
 @api_view(['GET'])
-def computer_vision_analyze(request, id:int):
+def computer_vision_analyze(request, name:str):
         pictureService = PictureService()
-        url = pictureService.get_paths(id)
+        url = pictureService.get_path(name)
         computer_vision = ComputerVision()
         picture_tags_analyzed = computer_vision.analyze_picture(url)
         print(picture_tags_analyzed)
