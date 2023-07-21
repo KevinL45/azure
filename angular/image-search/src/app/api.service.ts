@@ -7,14 +7,19 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private apiUrl = 'https://api.example.com'; // Replace with your API URL
+  private api="http://localhost:8000";
 
   constructor(private http: HttpClient) { }
 
-  uploadImage(imageFile: File): Observable<any> {
+  uploadImage(files: any){
     const formData: FormData = new FormData();
-    formData.append('image', imageFile);
-
-    return this.http.post(`${this.apiUrl}/images-test/`, formData);
+    console.log(files)
+    for (var i = 0; i < files.length; i++) {
+      formData.append("image", files[i]);
+      console.log("Files :"+files[i])
+    }
+    console.log(formData)
+    return this.http.post(`${this.api}/upload/pictures/`, formData);
   }
 
   searchImages(criteria: string): Observable<any> {

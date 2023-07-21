@@ -1,8 +1,9 @@
+import { ApiService } from './../../api.service';
 import { Component } from '@angular/core';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import { FormBuilder } from '@angular/forms';
-import {ReactiveFormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
@@ -13,43 +14,38 @@ import {MatIconModule} from '@angular/material/icon';
   imports: [MatChipsModule, MatSelectModule, ReactiveFormsModule, MatIconModule]
 })
 export class FormPictureUploadComponent {
-  tags_to_add: string[]= []
 
-  pictureUploadForm = this.formBuilder.group({
-    tags: [],
-    picture: File
+  files: any = []
+
+  uploadForm = new FormGroup({
+    file: new FormControl(''),
   });
 
-  tags: any[] =[]
+  constructor(private apiService: ApiService) {
 
-  constructor(private formBuilder: FormBuilder) {
+  }
 
+  get f(){
+    return this.uploadForm.controls;
   }
 
   ngOnInit() {
 
-    this.tags = [
-      {id: 1, value: 'steak-0'},
-      {id: 2, value: 'steak-2'},
-      {id: 3, value: 'steak-3'},
-    ];
-
-    this.tags_to_add = []
 
   }
 
-  onTagSelected(tag_selected: any) {
-    console.log(tag_selected)
-    let tag_found: any = this.tags_to_add.find(tag_selected)
-    // if (tag_found == undefined) {
-      this.tags_to_add.push(tag_selected)
-    // }
+
+
+
+  onFileChange(event:any) {
+    this.files = event.target.files;
+    console.log(this.files)
+
+
   }
 
   onSubmit(): void {
-    // Process checkout data here
-    console.warn('Your order has been submitted', this.pictureUploadForm.value);
-    this.pictureUploadForm.reset();
+    this.apiService.uploadImage(this.files)
   }
 
 

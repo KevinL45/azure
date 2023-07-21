@@ -1,34 +1,19 @@
-<div>
-<form [formGroup]="pictureUploadForm" (ngSubmit)="onSubmit()">
+<div >
+
+  <h1 class="d-flex justify-content-center"> UPLOAD</h1>
 
 
+<div class="card text-center">
+  <div class="card-body">
+    <h5 class="card-title">Image</h5>
+    <p class="card-text">Veuillez insérer les images de votre choix</p>
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
   <div>
-    <span>HELLO from FORMPICTUREUPLOAD</span>
-    <label for="tags">
-      Tag
-    </label>
-    <select #tags formControlName="tags" (change)="onTagSelected(tags)">
-      <option>test</option>
-      <option>test_2</option>
-      <option>test_3</option>
-    </select>
+      <input id="picture" type="file" formControlName="file" (change)="onFileChange($event)" multiple>
   </div>
-
   <div>
-    <label for="picture_to_upload">
-      Picture to upload
-    </label>
-    <input id="picture" type="file" formControlName="picture">
+    <button class="button" type="submit">Upload</button>
   </div>
-
-  <div>
-    <mat-chip-option *ngfor="let tag_selected of tags_to_add">{{tags_to_add}}</mat-chip-option>
-    <span>{{this.tags_to_add}}</span>
+  </form>
   </div>
-
-
-
-  <button class="button" type="submit">Upload</button>
-
-</form>
 </div>
