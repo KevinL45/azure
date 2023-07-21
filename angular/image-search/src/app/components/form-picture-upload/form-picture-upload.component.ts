@@ -15,13 +15,15 @@ import {MatIconModule} from '@angular/material/icon';
 })
 export class FormPictureUploadComponent {
 
-  files: any = []
+  files = []
 
   uploadForm = new FormGroup({
-    file: new FormControl(''),
+    files: new FormControl(''),
   });
 
   constructor(private apiService: ApiService) {
+
+
 
   }
 

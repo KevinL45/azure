@@ -21,22 +21,22 @@ export class ImageModelComponent {
     }
   }
 
-  uploadImage() {
-    if (this.selectedFile) {
-      this.apiService.uploadImage(this.selectedFile).subscribe(
-        response => {
-          // Handle successful upload
-          console.log('Image uploaded successfully:', response);
-          // Reset the selected file
-          this.selectedFile = null;
-        },
-        error => {
-          // Handle error
-          console.error('Image upload failed:', error);
-        }
-      );
-    }
-  }
+  // uploadImage() {
+  //   if (this.selectedFile) {
+  //     this.apiService.uploadImage(this.selectedFile).subscribe(
+  //       response => {
+  //         // Handle successful upload
+  //         console.log('Image uploaded successfully:', response);
+  //         // Reset the selected file
+  //         this.selectedFile = null;
+  //       },
+  //       error => {
+  //         // Handle error
+  //         console.error('Image upload failed:', error);
+  //       }
+  //     );
+  //   }
+  // }
   image:any[]=[];
 
   buttonClicked() {

@@ -9,12 +9,15 @@ export class ApiService {
   private apiUrl = 'https://api.example.com'; // Replace with your API URL
   private api="http://localhost:8000";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+
+  }
 
   uploadImage(files: any){
     const formData: FormData = new FormData();
     for (const file of files) {
-      formData.append('files', file);
+      formData.append('files', file, file.name);
     }
     console.log(formData.getAll("files"))
     return this.http.post(`${this.api}/upload/pictures/`, formData);
