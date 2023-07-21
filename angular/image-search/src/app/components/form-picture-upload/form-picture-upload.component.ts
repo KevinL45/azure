@@ -25,10 +25,6 @@ export class FormPictureUploadComponent {
 
   }
 
-  get f(){
-    return this.uploadForm.controls;
-  }
-
   ngOnInit() {
 
 
@@ -39,13 +35,15 @@ export class FormPictureUploadComponent {
 
   onFileChange(event:any) {
     this.files = event.target.files;
-    console.log(this.files)
-
-
   }
 
   onSubmit(): void {
+    if (this.files.length === 0) {
+      console.log('Vide');
+      return;
+    }else{
     this.apiService.uploadImage(this.files)
+    }
   }
 
 

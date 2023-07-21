@@ -13,12 +13,10 @@ export class ApiService {
 
   uploadImage(files: any){
     const formData: FormData = new FormData();
-    console.log(files)
-    for (var i = 0; i < files.length; i++) {
-      formData.append("image", files[i]);
-      console.log("Files :"+files[i])
+    for (const file of files) {
+      formData.append('files', file);
     }
-    console.log(formData)
+    console.log(formData.getAll("files"))
     return this.http.post(`${this.api}/upload/pictures/`, formData);
   }
 
