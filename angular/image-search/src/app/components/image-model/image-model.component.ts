@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
+import { Photo } from "../model/photo"
 
 @Component({
   selector: 'app-image-model',
@@ -11,8 +12,28 @@ import { HttpClient } from "@angular/common/http";
 export class ImageModelComponent {
   selectedFile: File | null = null;
   title = 'Image Description';
-  description!:string;
-  constructor(private apiService: ApiService) { }
+  description!: string;
+  photo: Photo[] = [];
+  constructor(private apiService: ApiService) {
+  }
+
+  ngOnInit(): void {
+    this.apiService.getPhoto().subscribe(photos => {
+      this.photo = photos;
+    });
+  }
+
+  // get all Photo:
+//   private Photos(response: []): void {
+//     this.photos = [];
+//     response.forEach((img: ) => {
+//         this.images.push(`data:image/png;base64,${img.image}`);
+//     });
+// }
+
+
+}
+/**
 
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -20,7 +41,6 @@ export class ImageModelComponent {
       this.selectedFile = inputElement.files[0];
     }
   }
-
   uploadImage() {
     if (this.selectedFile) {
       this.apiService.uploadImage(this.selectedFile).subscribe(
@@ -37,7 +57,7 @@ export class ImageModelComponent {
       );
     }
   }
-  image:any[]=[];
+
 
   buttonClicked() {
     alert('this is response to button click')
@@ -48,4 +68,5 @@ export class ImageModelComponent {
   //     this.image=data;
   //   });
   // }
-}
+
+*/

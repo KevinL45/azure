@@ -1,6 +1,6 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,13 +13,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
     AppComponent,
     ImageModelComponent,
     ImageSearchComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     MatSelectModule,
     MatIconModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
