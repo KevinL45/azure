@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../api.service';
+import { environment } from "../../../environments/environment";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
-  selector: 'app-image-upload',
-  templateUrl: './image-upload.component.html',
-  styleUrls: ['./image-upload.component.css']
+  selector: 'app-image-model',
+  templateUrl: './image-model.component.html',
+  styleUrls: ['./image-model.component.css']
 })
-export class ImageUploadComponent {
+export class ImageModelComponent {
   selectedFile: File | null = null;
-
+  title = 'Image Description';
+  description!:string;
   constructor(private apiService: ApiService) { }
 
   onFileSelected(event: Event) {
@@ -34,4 +37,15 @@ export class ImageUploadComponent {
       );
     }
   }
+  image:any[]=[];
+
+  buttonClicked() {
+    alert('this is response to button click')
+  }
+  // refreshList(){
+  //   this.HttpClient.get(environment.API_URL+environment.PHOTO_URL)
+  //     .subscribe(data=>{
+  //     this.image=data;
+  //   });
+  // }
 }

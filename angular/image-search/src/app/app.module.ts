@@ -4,7 +4,7 @@ import { HttpClientModule} from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ImageUploadComponent } from './components/image-upload/image-upload.component';
+import { ImageModelComponent } from './components/image-model/image-model.component';
 import { ImageSearchComponent } from './components/image-search/image-search.component';
 import { FormsModule } from "@angular/forms";
 import { FormPictureUploadComponent } from './components/form-picture-upload/form-picture-upload.component';
@@ -17,7 +17,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
   declarations: [
     AppComponent,
-    ImageUploadComponent,
+    ImageModelComponent,
     ImageSearchComponent,
     HomeComponent,
   ],

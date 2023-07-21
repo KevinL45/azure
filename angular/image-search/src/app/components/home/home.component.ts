@@ -14,5 +14,6 @@ export class HomeComponent {
     config.interval = 2000;
     config.keyboard = true;
     config.pauseOnHover = true;
+
   }
 }
