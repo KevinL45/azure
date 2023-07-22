@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError} from "rxjs";
-import { environment } from "../environments/environment";
+import { environment } from "../environments/environment.development";
 import { Photo } from "../app/components/model/photo";
 
 
@@ -12,7 +12,6 @@ import { Photo } from "../app/components/model/photo";
 export class ApiService {
 
   private apiUrl = 'https://api.example.com'; // Replace with your API URL
-  private api="http://localhost:8000";
 
   /**
    *   API_URL:"http://127.0.0.1:8000/",
@@ -35,7 +34,7 @@ export class ApiService {
       formData.append('files', file, file.name);
     }
     console.log(formData.getAll("files"))
-    return this.httpClient.post(`${this.api}/upload/pictures/`, formData);
+    return this.httpClient.post(`${environment.API_URL}upload/pictures/`, formData);
   }
 
   // getPhotos():Observable<Photo[]> {
@@ -43,7 +42,7 @@ export class ApiService {
   //   return this.httpClient.get<Photo[]>(`http://127.0.0.1:8000/` + `blobs/pictures/paths/`+`20`);
   // }
   getPhoto(){
-    return this.httpClient.get<Photo[]>(`http://127.0.0.1:8000/` + `blobs/pictures/paths/`+`20`);
+    return this.httpClient.get<Photo[]>(`${environment.API_URL}blobs/pictures/paths/`+`20`);
   }
   /**
    *  getBookInfos(): Observable<BookList> {
