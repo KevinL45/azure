@@ -41,8 +41,12 @@ export class ApiService {
   //  // return this.http.get<Photo>(environment.API_URL + environment.PHOTO_URL + `20`);
   //   return this.httpClient.get<Photo[]>(`http://127.0.0.1:8000/` + `blobs/pictures/paths/`+`20`);
   // }
-  getPhoto(){
-    return this.httpClient.get<Photo[]>(`${environment.API_URL}blobs/pictures/paths/`+`20`);
+  getPhotos(){
+    return this.httpClient.get<Photo[]>(`${environment.API_URL}photos/`);
+  }
+
+  getTag(id: any){
+    return this.httpClient.get(`${environment.API_URL}tag/`+id);
   }
   /**
    *  getBookInfos(): Observable<BookList> {

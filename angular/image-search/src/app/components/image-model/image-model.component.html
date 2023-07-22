@@ -9,23 +9,22 @@
 
   <div class="grid-container">
     </div>
-  <div class="container">
+  <div *ngFor="let photo of photos" class="container">
     <div class="row">
       <div class="col-md-4">
         <div class="card" style="width: 18rem;">
           <a href="https://pomonastorage.blob.core.windows.net/pictures/5a35d143-f1f5-4842-a7d9-3cc9e6cd6ced" download>
-            <img src="https://pomonastorage.blob.core.windows.net/pictures/5a35d143-f1f5-4842-a7d9-3cc9e6cd6ced" class="card-img-top" alt="...">
+            <img [src]="photo.picture" class="card-img-top" alt="...">
           </a>
-          <div *ngFor="let photo of photo">
-            <img [src]="photo">
-          </div>
           <div class="card-body">
-           <h5 class="card-title">Card title</h5>
-           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-           <a href="#" class="btn btn-primary">Go somewhere</a>
+           <h5 class="card-title">{{photo.name}}</h5>
+           <div *ngFor="let tag of photo.tags">
+            <p class="card-text">{{tag.name}}</p>
+          </div>
           </div>
         </div>
       </div>
     </div>
+    <br/><br/>
   </div>
 </body>

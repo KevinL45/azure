@@ -13,13 +13,14 @@ export class ImageModelComponent {
   selectedFile: File | null = null;
   title = 'Image Description';
   description!: string;
-  photo: Photo[] = [];
+  photos: Photo[] = [];
   constructor(private apiService: ApiService) {
   }
 
   ngOnInit(): void {
-    this.apiService.getPhoto().subscribe(photos => {
-      this.photo = photos;
+    this.apiService.getPhotos().subscribe(photos => {
+      this.photos = photos;
+      console.log(this.photos)
     });
   }
 
