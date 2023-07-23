@@ -19,7 +19,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('formats/',views.list_formats, name="Liste des formats"),
 
     path('photos/',views.list_photos, name="Liste des photos"),
     path('photo/<int:id>/',views.getPhoto , name="Photo"),

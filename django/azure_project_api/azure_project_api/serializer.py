@@ -11,7 +11,3 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ("__all__")
 
-class FormatSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Format
-        fields = ("__all__")

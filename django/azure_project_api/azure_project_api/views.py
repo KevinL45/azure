@@ -10,12 +10,6 @@ from rest_framework.parsers import JSONParser
 import json
 
 @api_view(['GET'])
-def list_formats(request):
-        format = Format.objects.all()
-        serializer = FormatSerializer(format, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-@api_view(['GET'])
 def list_photos(request):
         photo = Photo.objects.all()
         serializer = PhotoSerializer(photo, many=True)
@@ -130,14 +124,27 @@ def get_pictures(request, blob_name):
 
 @api_view(['POST'])
 def upload_pictures(request):
+
     pictures_uploaded_UUIDs = []
     pictureService = PictureService()
-    # local_path = "./data"
+    computerService = ComputerVision()
+
     print(len(request.FILES.getlist('files')))
     files = request.FILES.getlist('files')
-    # for ile in files:
-        # print(file.name)
+
     pictures_uploaded_UUIDs = pictureService.upload_files(files)
+
+    for blob in pictures_uploaded_UUIDs:
+        url_picture = pictureService.get_path(blob)
+        tag_list = computerService.analyze_picture(url_picture)
+        for tag in tag_list:
+            Tag.objects.create(name=tag['name'], confidence=tag['confidence'])
+        photo = Photo.objects.create(name=blob,picture=url_picture)
+        for tag in tag_list:
+            tags=Tag.objects.filter(name=tag['name'])
+            if tags.exists():
+                tag_id = tags.first().id
+                photo.tags.add(tag_id)
     return JsonResponse(pictures_uploaded_UUIDs, safe=False) 
 
 @api_view(['POST'])
@@ -176,5 +183,6 @@ def computer_vision_analyze(request, name:str):
         computer_vision = ComputerVision()
         picture_tags_analyzed = computer_vision.analyze_picture(url)
         # print(picture_tags_analyzed)
-        pictures_tags_stringified = json.dumps({"pictures_tags" : picture_tags_analyzed})
+        pictures_tags_stringified = json.dumps(picture_tags_analyzed)
         return HttpResponse(pictures_tags_stringified,"application/json")
+

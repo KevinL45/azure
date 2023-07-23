@@ -136,22 +136,22 @@ class ComputerVision:
             #         print("   Aspect ratio {}: Crop suggestion {}"
             #             .format(crop_suggestion.aspect_ratio, crop_suggestion.bounding_box))
 
-            if result.text is not None:
-                print(" Text:")
-                for line in result.text.lines:
-                    points_string = "{" + ", ".join([str(int(point)) for point in line.bounding_polygon]) + "}"
-                    print("   Line: '{}', Bounding polygon {}".format(line.content, points_string))
-                    for word in line.words:
-                        points_string = "{" + ", ".join([str(int(point)) for point in word.bounding_polygon]) + "}"
-                        print("     Word: '{}', Bounding polygon {}, Confidence {:.4f}"
-                            .format(word.content, points_string, word.confidence))
+            # if result.text is not None:
+            #     print(" Text:")
+            #     for line in result.text.lines:
+            #         points_string = "{" + ", ".join([str(int(point)) for point in line.bounding_polygon]) + "}"
+            #         print("   Line: '{}', Bounding polygon {}".format(line.content, points_string))
+            #         for word in line.words:
+            #             points_string = "{" + ", ".join([str(int(point)) for point in word.bounding_polygon]) + "}"
+            #             print("     Word: '{}', Bounding polygon {}, Confidence {:.4f}"
+            #                 .format(word.content, points_string, word.confidence))
 
-            result_details = visionsdk.ImageAnalysisResultDetails.from_result(result)
-            print(" Result details:")
-            print("   Image ID: {}".format(result_details.image_id))
-            print("   Result ID: {}".format(result_details.result_id))
-            print("   Connection URL: {}".format(result_details.connection_url))
-            print("   JSON result: {}".format(result_details.json_result))
+            # result_details = visionsdk.ImageAnalysisResultDetails.from_result(result)
+            # print(" Result details:")
+            # print("   Image ID: {}".format(result_details.image_id))
+            # print("   Result ID: {}".format(result_details.result_id))
+            # print("   Connection URL: {}".format(result_details.connection_url))
+            # print("   JSON result: {}".format(result_details.json_result))
 
         else:
 
