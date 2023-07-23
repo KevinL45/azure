@@ -11,7 +11,7 @@ import { Photo } from "../model/photo"
 })
 export class ImageModelComponent {
   selectedFile: File | null = null;
-  title = 'Image Description';
+  title = 'Recherche des images par tags';
   description!: string;
   photos: Photo[] = [];
   constructor(private apiService: ApiService) {

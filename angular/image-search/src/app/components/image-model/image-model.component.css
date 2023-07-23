@@ -1,0 +1,10 @@
+/* styles.css ou app.component.css */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-item {
+  padding: 20px;
+}

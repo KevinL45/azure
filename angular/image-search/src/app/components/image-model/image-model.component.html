@@ -6,10 +6,8 @@
 <body>
   <h1> {{title}}</h1>
   <hr>
-
-  <div class="grid-container">
-    </div>
-  <div *ngFor="let photo of photos" class="container">
+  <div  class="grid-container">
+  <div  *ngFor="let photo of photos" class="grid-item">
     <div class="row">
       <div class="col-md-4">
         <div class="card" style="width: 18rem;">
@@ -27,4 +25,5 @@
     </div>
     <br/><br/>
   </div>
+</div>
 </body>
