@@ -2,10 +2,8 @@ import { Tag } from './../model/tag';
 import { Photo } from './../model/photo';
 import { Component } from '@angular/core';
 import { ApiService } from '../../api.service';
-import { environment } from "../../../environments/environment";
-import { HttpClient } from "@angular/common/http";
-import { map } from 'rxjs/operators'; // Make sure to import the 'map' operator
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-image-model',
@@ -17,7 +15,7 @@ export class ImageModelComponent {
   photos: Photo[] = [];
   tags: Tag[]=[];
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -25,9 +23,22 @@ export class ImageModelComponent {
       this.photos = photos;
     });
 
-    this.apiService.getTag(1).subscribe(tag=>{
-      console.log(tag.name)
-    })
+
+  }
+
+  download(url_image:string,name_image:string):void{
+    this.http.get(url_image, { responseType: 'blob' }).subscribe((imageBlob: Blob) => {
+      const downloadUrl = URL.createObjectURL(imageBlob);
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = name_image;
+      link.click();
+    });
+  }
+
+  delete_picture(id:number){
+    this.apiService.deleteImage(id)
+  }
 
   }
 
@@ -36,5 +47,5 @@ export class ImageModelComponent {
 
 
 
-}
+
 
