@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError} from "rxjs";
 import { environment } from "../environments/environment.development";
 import { Photo } from "../app/components/model/photo";
+import { Tag } from './components/model/tag';
 
 
 @Injectable({
@@ -28,13 +29,9 @@ export class ApiService {
 
    photo:Photo[]= [];
 
-  uploadImage(files: any){
-    const formData: FormData = new FormData();
-    for (const file of files) {
-      formData.append('files', file, file.name);
-    }
-    console.log(formData.getAll("files"))
-    return this.httpClient.post(`${environment.API_URL}upload/pictures/`, formData);
+  uploadImage(files: File[]){
+    console.log(files)
+    return this.httpClient.post<Photo>(`${environment.API_URL}upload/pictures/`, files);
   }
 
   // getPhotos():Observable<Photo[]> {
@@ -45,8 +42,12 @@ export class ApiService {
     return this.httpClient.get<Photo[]>(`${environment.API_URL}photos/`);
   }
 
-  getTag(id: any){
-    return this.httpClient.get(`${environment.API_URL}tag/`+id);
+  getTags(){
+    return this.httpClient.get<Tag[]>(`${environment.API_URL}tags/`);
+  }
+
+  getTag(id:any){
+    return this.httpClient.get<Tag>(`${environment.API_URL}tag/${id}`);
   }
   /**
    *  getBookInfos(): Observable<BookList> {

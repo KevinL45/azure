@@ -1,8 +1,4 @@
-<!--<div>-->
-<!--  <h2>Image Upload</h2>-->
-<!--  <input type="file" (change)="onFileSelected($event)" accept="image/*">-->
-<!--  <button (click)="uploadImage()" [disabled]="!selectedFile">Upload</button>-->
-<!--</div>-->
+
 <body>
   <h1> {{title}}</h1>
   <hr>
@@ -11,13 +7,13 @@
     <div class="row">
       <div class="col-md-4">
         <div class="card" style="width: 18rem;">
-          <a href="https://pomonastorage.blob.core.windows.net/pictures/5a35d143-f1f5-4842-a7d9-3cc9e6cd6ced" download>
+          <a href="photo.picture" download>
             <img [src]="photo.picture" class="card-img-top" alt="...">
           </a>
           <div class="card-body">
            <h5 class="card-title">{{photo.name}}</h5>
            <div *ngFor="let tag of photo.tags">
-            <p class="card-text">{{tag.name}}</p>
+            <p class="card-text">{{tag}}</p>
           </div>
           </div>
         </div>

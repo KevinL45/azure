@@ -15,7 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 })
 export class FormPictureUploadComponent {
 
-  files = []
+  files:File[]=[]
 
   uploadForm = new FormGroup({
     files: new FormControl(''),
