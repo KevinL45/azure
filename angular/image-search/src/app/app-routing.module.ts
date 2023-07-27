@@ -7,6 +7,7 @@ import { ImageModelComponent } from "./components/image-model/image-model.compon
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'list', component: ImageModelComponent },
   { path: 'search', component: ImageSearchComponent },
   // { path: 'upload', component: ImageUploadComponent },
   { path: 'upload', component: FormPictureUploadComponent },

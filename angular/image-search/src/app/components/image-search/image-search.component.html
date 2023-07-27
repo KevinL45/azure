@@ -1,10 +1,10 @@
 <div>
-  <h2>Image Search</h2>
-  <input type="text" [(ngModel)]="searchCriteria" (input)="searchImages()" placeholder="Enter search criteria">
+  <h2>Recherche des images par tags</h2>
+  <input type="text" [(ngModel)]="searchCriteria" (input)="searchImages()" placeholder="Entrée le nom des tags">
 </div>
 
 <div *ngIf="searchResults.length > 0">
-  <h3>Search Results:</h3>
+  <h3>Liste des images :</h3>
   <div class="image-list">
     <div class="image-item" *ngFor="let image of searchResults">
       <img [src]="image.url" [alt]="image.description">
@@ -15,4 +15,3 @@
     </div>
   </div>
 </div>
-<app-image-model></app-image-model>

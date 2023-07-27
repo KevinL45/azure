@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./image-model.component.css']
 })
 export class ImageModelComponent {
-  title = 'Recherche des images par tags';
   photos: Photo[] = [];
   tags: Tag[]=[];
 
