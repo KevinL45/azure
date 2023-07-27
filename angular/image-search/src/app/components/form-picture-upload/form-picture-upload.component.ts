@@ -47,6 +47,7 @@ export class FormPictureUploadComponent {
     this.apiService.uploadImage(this.files).subscribe({
       next: (response) => {
         console.log("Les photos sont insérés");
+        Image
       },
       error: (error) => {
         console.error('Erreur lors de la requête POST : ', error);
