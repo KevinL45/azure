@@ -12,7 +12,6 @@ import { Tag } from './components/model/tag';
 })
 export class ApiService {
 
-  private apiUrl = 'https://api.example.com'; // Replace with your API URL
 
   constructor(private httpClient: HttpClient) {
     console.log(environment);
@@ -21,7 +20,11 @@ export class ApiService {
    photo:Photo[]= [];
 
   uploadImage(files: File[]){
-    console.log(files)
+    const formData: FormData = new FormData();
+    for(const file in files){
+      formData.append("files",file)
+    }
+
     return this.httpClient.post(`${environment.API_URL}upload/pictures/`, files);
   }
 
@@ -29,23 +32,27 @@ export class ApiService {
     return this.httpClient.get<Photo[]>(`${environment.API_URL}photos/`);
   }
 
+  getPhoto(id:number){
+    return this.httpClient.get<Photo>(`${environment.API_URL}photos/${id}/`);
+  }
+
   getTags(){
     return this.httpClient.get<Tag[]>(`${environment.API_URL}tags/`);
   }
 
   getTag(id:number){
-    return this.httpClient.get<Tag>(`${environment.API_URL}tag/${id}`);
+    return this.httpClient.get<Tag>(`${environment.API_URL}tag/${id}/`);
   }
 
-  searchImages(criteria: string): Observable<any> {
-    return this.httpClient.get(`${this.apiUrl}/images-test?filter=${criteria}`);
-  }
+  // searchImages(criteria: string): Observable<any> {
+  //   return this.httpClient.get(`${this.apiUrl}/images-test?filter=${criteria}`);
+  // }
 
-  updateImageProperties(image: any): Observable<any> {
-    return this.httpClient.put(`${this.apiUrl}/images-test/${image.id}`, image);
-  }
+  // updateImageProperties(image: any): Observable<any> {
+  //   return this.httpClient.put(`${this.apiUrl}/images-test/${image.id}`, image);
+  // }
 
-  deleteImage(id: number): Observable<any> {
-    return this.httpClient.delete<Photo>(`${environment.API_URL}remove_photo/${id}`);
+  deletePhoto(id: number){
+    return this.httpClient.delete<Photo>(`${environment.API_URL}remove_photo/${id}/`);
   }
 }
