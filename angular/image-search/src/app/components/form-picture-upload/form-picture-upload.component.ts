@@ -44,7 +44,14 @@ export class FormPictureUploadComponent {
       console.log('Vide');
       return;
     }else{
-    this.apiService.uploadImage(this.files)
+    this.apiService.uploadImage(this.files).subscribe({
+      next: (response) => {
+        console.log("Les photos sont insérés");
+      },
+      error: (error) => {
+        console.error('Erreur lors de la requête POST : ', error);
+      }
+    });
     }
   }
 

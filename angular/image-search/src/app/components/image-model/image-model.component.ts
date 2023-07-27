@@ -3,6 +3,8 @@ import { Photo } from './../model/photo';
 import { Component } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -15,7 +17,7 @@ export class ImageModelComponent {
   photos: Photo[] = [];
   tags: Tag[]=[];
 
-  constructor(private apiService: ApiService, private http: HttpClient) {
+  constructor(private apiService: ApiService, private http: HttpClient, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -37,8 +39,24 @@ export class ImageModelComponent {
   }
 
   delete_picture(id:number){
-    this.apiService.deleteImage(id)
+    console.log("L'id de la photo :"+ id)
+    this.apiService.deletePhoto(id).subscribe({
+      next: (response) => {
+        console.log('Photo supprimé');
+        this.refreshPage()
+      },
+      error: (error) => {
+        console.error('Erreur lors de la requête DELETE : ', error);
+      }
+    });
   }
+
+  refreshPage() {
+  const currentUrl = this.router.url;
+  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigate([currentUrl]);
+  });
+}
 
   }
 
