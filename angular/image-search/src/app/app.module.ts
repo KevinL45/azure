@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { environment } from "../environments/environment";
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { environment } from "../environments/environment";
     MatIconModule,
     HttpClientModule,
     NgbModule,
+    CommonModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

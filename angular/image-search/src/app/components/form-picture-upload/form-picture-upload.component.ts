@@ -5,6 +5,10 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormBuilder } from '@angular/forms';
 import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import { ImageModelComponent } from '../image-model/image-model.component';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Component({
   standalone: true,
@@ -15,15 +19,9 @@ import {MatIconModule} from '@angular/material/icon';
 })
 export class FormPictureUploadComponent {
 
-  files:File[]=[]
+  files:File[]=[];
 
-  uploadForm = new FormGroup({
-    files: new FormControl(''),
-  });
-
-  constructor(private apiService: ApiService) {
-
-
+  constructor(private apiService: ApiService, private router: Router) {
 
   }
 
@@ -31,9 +29,6 @@ export class FormPictureUploadComponent {
 
 
   }
-
-
-
 
   onFileChange(event:any) {
     this.files = event.target.files;
@@ -47,13 +42,20 @@ export class FormPictureUploadComponent {
     this.apiService.uploadImage(this.files).subscribe({
       next: (response) => {
         console.log("Les photos sont insérés");
-        Image
+          this.refreshPage()
       },
       error: (error) => {
         console.error('Erreur lors de la requête POST : ', error);
       }
     });
     }
+  }
+
+  refreshPage() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 
 
