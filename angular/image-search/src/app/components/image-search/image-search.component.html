@@ -1,20 +1,33 @@
-<div>
 <div *ngIf="searchResults.length > 0">
   <h3>Liste des images :</h3>
-  <h2>Recherche des images par tags</h2>
-</div>
 
-  <div class="image-list">
-    <div class="image-item" *ngFor="let image of searchResults">
-      <img [src]="image.url" [alt]="image.description">
-      <div class="image-properties">
-        <input type="text" [(ngModel)]="image.description" (input)="updateImageProperties(image)">
-        <button (click)="deleteImage(image)">Delete</button>
-      </div>
-    </div>
-  </div>
+  <div>
+  <h2>Recherche des images par tags</h2>
+  <form>
+  <mat-form-field class="example-chip-list">
+    <mat-label>Tags à rechercher</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Fruit selection">
+      <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+        {{fruit}}
+        <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    </mat-chip-grid>
+    <input placeholder="New Fruit..." #fruitInput [formControl]="fruitCtrl"
+      [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="add($event)"/>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+        {{fruit}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+</div>
   <h2>Recherche des images</h2>
-  {# <input type="text" [(ngModel)]="recherche" (input)="searchPhoto()" placeholder="Saisir le nom du tag"> #}
+
 </div>
 
 

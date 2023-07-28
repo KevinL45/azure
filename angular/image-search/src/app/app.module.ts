@@ -14,14 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { environment } from "../environments/environment";
-<<<<<<< HEAD
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import {MatAutocompleteSelectedEvent, MatAutocompleteModule} from '@angular/material/autocomplete';
-=======
-import { CommonModule } from '@angular/common';
->>>>>>> a1dc4c153c4e34a55ae46761714806b9cbdbcd39
 
 @NgModule({
   declarations: [

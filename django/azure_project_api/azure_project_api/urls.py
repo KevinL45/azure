@@ -26,7 +26,7 @@ urlpatterns = [
     path('remove_photo/<int:id>/',views.delete_photo, name="Supprimer une photo"),
     path('update_photo/<int:id>/',views.update_photo, name="Modifier une photo"),
 
-
+    path('tags-available/', views.get_available_tags, name= "Liste des tags par occurence"),
     path('tags/',views.list_tags, name="Liste des tags"),
     path('tag/<int:id>/',views.getTag , name="Tag"),
     path('add_tag/',views.create_tag , name="Ajouter un tag"),
