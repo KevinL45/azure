@@ -7,13 +7,11 @@
   <div class="card-body">
     <h5 class="card-title">Image</h5>
     <p class="card-text">Veuillez insérer les images de votre choix</p>
-    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
   <div>
-      <input id="picture" type="file" formControlName="files" (change)="onFileChange($event)" multiple>
+      <input id="picture" type="file" (change)="onFileChange($event)" multiple>
   </div>
   <div>
-    <button class="button" type="submit">Upload</button>
+    <button (click)="onSubmit()">Upload</button>
   </div>
-  </form>
   </div>
 </div>

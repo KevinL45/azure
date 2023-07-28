@@ -5,7 +5,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Observable, map, startWith } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-image-search',
@@ -16,6 +16,11 @@ export class ImageSearchComponent {
   searchCriteria: string = '';
   searchResults: any[] = [];
   available_tags: string[] = []
+
+  recherche:String =""
+
+
+
 
   ////////////////////////
   separatorKeysCodes: number[] = [0, 1];
@@ -81,51 +86,11 @@ export class ImageSearchComponent {
 
   ////////////////////////////////
 
-  searchImages() {
-    // if (this.searchCriteria.trim() !== '') {
-    //   this.apiService.searchImages(this.searchCriteria).subscribe(
-    //     response => {
-    //       // Handle successful search
-    //       console.log('Search results:', response);
-    //       this.searchResults = response;
-    //     },
-    //     error => {
-    //       // Handle error
-    //       console.error('Search failed:', error);
-    //     }
-    //   );
-    // } else {
-    //   this.searchResults = [];
-    // }
-  }
+  // onSubmit(): void {
 
-  updateImageProperties(image: any) {
-    // // Call the API service to update the image properties
-    // this.apiService.updateImageProperties(image).subscribe(
-    //   response => {
-    //     // Handle successful update
-    //     console.log('Image properties updated:', response);
-    //   },
-    //   error => {
-    //     // Handle error
-    //     console.error('Failed to update image properties:', error);
-    //   }
-    // );
-  }
+  // }
 
-  deleteImage(image: any) {
-    // // Call the API service to delete the image
-    // this.apiService.deleteImage(image.id).subscribe(
-    //   response => {
-    //     // Handle successful delete
-    //     console.log('Image deleted:', response);
-    //     // Remove the deleted image from the search results
-    //     this.searchResults = this.searchResults.filter(item => item.id !== image.id);
-    //   },
-    //   error => {
-    //     // Handle error
-    //     console.error('Failed to delete image:', error);
-    //   }
-    // );
-  }
+  // searchPhoto(): void{
+  // }
+
 }

@@ -20,12 +20,13 @@ export class ApiService {
    photo:Photo[]= [];
 
   uploadImage(files: File[]){
-    const formData: FormData = new FormData();
-    for(const file in files){
-      formData.append("files",file)
+    const formData = new FormData();
+    for (const image of files) {
+      formData.append('files', image);
     }
+    console.log(formData.getAll("files"))
 
-    return this.httpClient.post(`${environment.API_URL}upload/pictures/`, files);
+    return this.httpClient.post<any>(`${environment.API_URL}upload/pictures/`, formData);
   }
 
   getPhotos(){
