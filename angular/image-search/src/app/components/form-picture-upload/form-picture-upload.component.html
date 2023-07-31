@@ -5,13 +5,13 @@
 
 <div class="card text-center">
   <div class="card-body">
-    <h5 class="card-title">Image</h5>
+    <h5 class="card-title">Images</h5>
     <p class="card-text">Veuillez insérer les images de votre choix</p>
   <div>
       <input id="picture" type="file" (change)="onFileChange($event)" multiple>
   </div>
   <div>
-    <button (click)="onSubmit()">Upload</button>
+    <button class="btn btn-primary" (click)="onSubmit()"><i class="bi bi-upload"></i></button>
   </div>
   </div>
 </div>
