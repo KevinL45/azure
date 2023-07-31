@@ -9,10 +9,11 @@
             <img [src]="photo.picture" class="card-img-top">
           </a>
           <div class="card-body">
-            <button class="btn btn-primary" (click)="download(photo.picture, photo.name)">Télécharger</button>
-            <button class="btn btn-danger" (click)="delete_picture(photo.id)">Supprimer</button>
+            <button class="btn btn-success" (click)="download(photo.picture,photo.name)"><i class="bi bi-box-arrow-down"></i>
+            </button>
+            <button class="btn btn-danger" (click)="delete_picture(photo.id)"><i class="bi bi-trash-fill"></i></button>
            <div *ngFor="let tag of photo.tags">
-            <p class="card-text">{{tag.name}}</p>
+            <span>{{tag.name}}</span>
           </div>
           </div>
         </div>
