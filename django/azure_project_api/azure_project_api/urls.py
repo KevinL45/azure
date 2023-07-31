@@ -30,7 +30,7 @@ urlpatterns = [
 
 
 
-    path('tags-available/', views.get_available_tags, name= "Liste des tags par occurence"),
+    path('tags-available/<int:max_tags>/', views.get_available_tags, name= "Liste des tags par occurence / poularité"),
     path('tags/',views.list_tags, name="Liste des tags"),
     path('tag/<int:id>/',views.getTag , name="Tag"),
     path('add_tag/',views.create_tag , name="Ajouter un tag"),

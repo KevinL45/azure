@@ -58,6 +58,10 @@ export class ApiService {
     return this.httpClient.get<Tag[]>(`${environment.API_URL}tags/`);
   }
 
+  getAvailableTags(maxTags: number= 10) {
+    return this.httpClient.get<string>(`${environment.API_URL}tags-available/${maxTags}/`);
+  }
+
   getTag(id:number){
     return this.httpClient.get<Tag>(`${environment.API_URL}tag/${id}/`);
   }

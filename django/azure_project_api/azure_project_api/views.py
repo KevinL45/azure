@@ -1,3 +1,4 @@
+
 from rest_framework import status
 
 from .pictures_service import PictureService
@@ -92,14 +93,22 @@ def getTag(request,id):
         return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET'])
-def get_available_tags(request):
-        # tag = Tag.objects.filter(id=id)
-        # .values().annotate(ocurrence=Count('name')).order_by('name')
-        tag = Tag.objects.values('name').distinct().annotate(ocurrence=Count('name'))
+def get_available_tags(request, max_tags=10):
+        tags: [] = []
+        class TagOccurence:
+            name =  "",
+            occurence = 0
+
+        try:
+            tags_temp: [] = Tag.objects.values('name').distinct() \
+                .annotate(ocurrence=Count('name')) \
+                .order_by('-ocurrence')[:max_tags]
+            for tag_temp in tags_temp:
+                tags.append(tag_temp)
+        except:
+             print('error')
         
-        # print(tag[0])
-        serializer = TagOcurrenceSerializer(tag, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse({'available-tags': tags}, safe=False)
 
 @api_view(['GET','POST'])
 def create_tag(request):

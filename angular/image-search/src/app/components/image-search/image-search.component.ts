@@ -42,10 +42,20 @@ export class ImageSearchComponent {
   }
 
   ngOnInit(): void {
-    this.apiService.getPhotos().subscribe(photos => {
-      this.tagsAvailable = photos.flatMap(x => x.tags.map(x => x.name))
-      console.log(this.tagsAvailable)
-    });
+    this.apiService.getAvailableTags().subscribe((availableTags: any) => {
+      if (availableTags != null) {
+        let availableTagsResults: any = availableTags
+        console.log(availableTagsResults)
+        let test = availableTagsResults['available-tags']
+        console.log(test)
+        this.available_tags = test.map((data: any) => data.name)
+        console.log(this.available_tags)
+      }
+    })
+    // this.apiService.getPhotos().subscribe(photos => {
+    //   this.tagsAvailable = photos.flatMap(x => x.tags.map(x => x.name))
+    //   console.log(this.tagsAvailable)
+    // });
   }
 
   add(event: MatChipInputEvent): void {
