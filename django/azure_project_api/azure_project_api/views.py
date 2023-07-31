@@ -75,6 +75,13 @@ def getTag(request,id):
         serializer = TagSerializer(tag, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+@api_view(['GET'])
+def get_available_tags(request):
+        # tag = Tag.objects.filter(id=id)
+        tag = Tag.objects.all().group_by('name')
+        serializer = TagSerializer(tag, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
 @api_view(['GET','POST'])
 def create_tag(request):
     if request.method == 'GET':

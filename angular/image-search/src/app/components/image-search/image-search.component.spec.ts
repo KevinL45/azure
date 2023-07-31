@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ImageSearchComponent } from './image-search.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 describe('ImageSearchComponent', () => {
   let component: ImageSearchComponent;
