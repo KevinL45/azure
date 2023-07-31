@@ -14,7 +14,7 @@ from random import sample
 
 @api_view(['GET'])
 def ten_photos(request):
-        photo = Photo.objects.all()[:10]
+        photo = Photo.objects.all()[:8]
         serializer = PhotoSerializer(photo, many=True)
         return JsonResponse(serializer.data, safe=False)
 

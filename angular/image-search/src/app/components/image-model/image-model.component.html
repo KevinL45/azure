@@ -1,16 +1,14 @@
 
-<body>
+  <h1 class="d-flex justify-content-center">LIST</h1>
+
   <div  class="grid-container">
   <div  *ngFor="let photo of photos" class="grid-item">
     <div class="row">
       <div class="col-md-4">
         <div class="card" style="width: 18rem;">
-          <a href="photo.picture">
             <img [src]="photo.picture" class="card-img-top">
-          </a>
           <div class="card-body">
-            <button class="btn btn-success" (click)="download(photo.picture,photo.name)"><i class="bi bi-box-arrow-down"></i>
-            </button>
+            <button class="btn btn-success" (click)="download(photo.picture,photo.name)"><i class="bi bi-box-arrow-down"></i></button>
             <button class="btn btn-danger" (click)="delete_picture(photo.id)"><i class="bi bi-trash-fill"></i></button>
            <div *ngFor="let tag of photo.tags">
             <span>{{tag.name}}</span>
@@ -22,4 +20,3 @@
     <br/><br/>
   </div>
 </div>
-</body>
