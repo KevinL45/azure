@@ -26,14 +26,11 @@ export class ImageModelComponent {
 
   }
 
-  download(url_image:string,name_image:string):void{
-    this.http.get(url_image, { responseType: 'blob' }).subscribe((imageBlob: Blob) => {
-      const downloadUrl = URL.createObjectURL(imageBlob);
-      const link = document.createElement('a');
-      link.href = downloadUrl;
-      link.download = name_image;
-      link.click();
-    });
+  download(url_image:string, name_image:string):void{
+    const link = document.createElement('a');
+    link.href = this.apiService.constructDownloadImageURI(name_image);
+    link.download = ` ${name_image}.jpeg`;
+    link.click();
   }
 
   delete_picture(id:number){

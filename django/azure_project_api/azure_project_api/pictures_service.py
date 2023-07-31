@@ -26,20 +26,10 @@ class PictureService:
             result.append(blob_name)
         return result if result is not None else []
 
-    # *WIP
-    def download_blob(self, blob_name_to_upload):
-        # containers = self.service.list_containers()
-        container_client = self.service.get_container_client("pictures")
-        # container_blob_names = container_client.list_blob_names()
-        # print(container_blob_names)
-        # for blob_name in container_blob_names:
-        #     print(blob_name)
-        blob_client = self.get_blob_client(container="pictures", blob=blob_name_to_upload)
-
-    # readinto() downloads the blob contents to a stream and returns the number of bytes read
-        stream = io.BytesIO()
-        num_bytes = blob_client.download_blob().readinto(stream)
-        print(f"Number of bytes: {num_bytes}")
+    def download_blob(self, blob_name_to_download):
+        blob_client: BlobClient = self.service.get_blob_client(container="pictures", blob=blob_name_to_download)
+        blob_downloaded = blob_client.download_blob()
+        return blob_downloaded
 
     def get_blobs_paths(self, blob_number_max:int):
         result = []
