@@ -33,6 +33,14 @@ export class ApiService {
     return this.httpClient.get<Photo[]>(`${environment.API_URL}photos/`);
   }
 
+  getRandomPhotos(){
+    return this.httpClient.get<Photo[]>(`${environment.API_URL}random_photos/`);
+  }
+
+  getTenPhtos(){
+    return this.httpClient.get<Photo[]>(`${environment.API_URL}ten_photos/`);
+  }
+
   getPhoto(id:number){
     return this.httpClient.get<Photo>(`${environment.API_URL}photos/${id}/`);
   }

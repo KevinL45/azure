@@ -8,11 +8,25 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 import json
+from random import sample
+
+@api_view(['GET'])
+def ten_photos(request):
+        photo = Photo.objects.all()[:10]
+        serializer = PhotoSerializer(photo, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET'])
 def list_photos(request):
         photo = Photo.objects.all()
         serializer = PhotoSerializer(photo, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+@api_view(['GET'])
+def random_photos(request):
+        photos = Photo.objects.all()
+        random_photos = sample(list(photos), 5)
+        serializer = PhotoSerializer(random_photos, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET'])
