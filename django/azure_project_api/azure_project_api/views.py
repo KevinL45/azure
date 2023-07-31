@@ -101,8 +101,8 @@ def get_available_tags(request, max_tags=10):
 
         try:
             tags_temp: [] = Tag.objects.values('name').distinct() \
-                .annotate(ocurrence=Count('name')) \
-                .order_by('-ocurrence')[:max_tags]
+                .annotate(occurence=Count('name')) \
+                .order_by('-occurence')[:max_tags]
             for tag_temp in tags_temp:
                 tags.append(tag_temp)
         except:

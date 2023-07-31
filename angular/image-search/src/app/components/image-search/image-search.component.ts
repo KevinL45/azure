@@ -7,6 +7,10 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Observable, map, startWith } from 'rxjs';
 import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
 
+interface AvailableTag {
+  name: string,
+  occurence: string
+}
 @Component({
   selector: 'app-image-search',
   templateUrl: './image-search.component.html',
@@ -15,7 +19,8 @@ import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
 export class ImageSearchComponent {
   searchCriteria: string = '';
   searchResults: any[] = [];
-  available_tags: string[] = []
+  available_tags: AvailableTag[] = []
+  all_tags: string[] = []
 
   recherche:String =""
 
@@ -28,7 +33,7 @@ export class ImageSearchComponent {
   filteredFruits: Observable<string[]>;
   fruits: string[] = ['Lemon'];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
-  tagsAvailable: string[] = []
+  tagsAvailable: AvailableTag[] = []
   // constructor(private apiService: ApiService) { }
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> | undefined;
 
@@ -42,14 +47,25 @@ export class ImageSearchComponent {
   }
 
   ngOnInit(): void {
-    this.apiService.getAvailableTags().subscribe((availableTags: any) => {
+    this.apiService.getAvailableTags(20).subscribe((availableTags: any) => {
       if (availableTags != null) {
         let availableTagsResults: any = availableTags
-        console.log(availableTagsResults)
-        let test = availableTagsResults['available-tags']
-        console.log(test)
-        this.available_tags = test.map((data: any) => data.name)
-        console.log(this.available_tags)
+        let datas = availableTagsResults['available-tags']
+        if (datas != null)  {
+          this.available_tags = (datas as AvailableTag[]).map((data: AvailableTag) =>  {
+            // data.occurence = parseInt((data.occurence as string))
+            console.log(data)
+            return data
+          })
+       }
+        // this.available_tags = test.map((data: any) => data.name)
+      }
+    })
+    this.apiService.getAvailableTags(1000).subscribe((allTags: any) => {
+      if (allTags != null) {
+        let availableTagsResults: any = allTags;
+        let datas = availableTagsResults['available-tags']
+        this.all_tags = datas.map((data: any) => data.name)
       }
     })
     // this.apiService.getPhotos().subscribe(photos => {
