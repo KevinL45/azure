@@ -4,9 +4,11 @@ from .pictures_service import PictureService
 from .computer_vision_service import ComputerVision
 
 from .serializer import *
-from django.http import HttpResponse, JsonResponse
+from django.http import FileResponse, HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
+from django.db.models import Count
+
 import json
 
 @api_view(['GET'])
@@ -78,8 +80,11 @@ def getTag(request,id):
 @api_view(['GET'])
 def get_available_tags(request):
         # tag = Tag.objects.filter(id=id)
-        tag = Tag.objects.all().group_by('name')
-        serializer = TagSerializer(tag, many=True)
+        # .values().annotate(ocurrence=Count('name')).order_by('name')
+        tag = Tag.objects.values('name').distinct().annotate(ocurrence=Count('name'))
+        
+        # print(tag[0])
+        serializer = TagOcurrenceSerializer(tag, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET','POST'])
@@ -154,17 +159,13 @@ def upload_pictures(request):
                 photo.tags.add(tag_id)
     return JsonResponse(pictures_uploaded_UUIDs, safe=False) 
 
-@api_view(['POST'])
-def download_pictures(request):
-    pictures_uploaded = []
+@api_view(['GET'])
+def download_pictures(request, UUID):
     pictureService = PictureService()
-    # local_path = "./data"
-    files = request.FILES['files']
-    for file in files:
-        print(file.name)
-        picture_uploaded = pictureService.upload_blob(file.read(), file.name)
-        pictures_uploaded.append(picture_uploaded)
-        
+    downloaded_pictures = pictureService.download_blob(UUID)
+    response = FileResponse(downloaded_pictures, content_type="image/jpeg")
+    response['Content-Disposition'] = 'attachment; filename="%s.jpg"'%UUID
+    return response
 
 # //OK
 @api_view(['GET'])

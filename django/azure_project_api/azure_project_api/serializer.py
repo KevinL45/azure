@@ -6,6 +6,11 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ("__all__")
 
+class TagOcurrenceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ["name"]
+
 class PhotoSerializer(serializers.ModelSerializer):
 
     tags = TagSerializer(many=True, read_only=True)

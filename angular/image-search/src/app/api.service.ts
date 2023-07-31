@@ -29,6 +29,15 @@ export class ApiService {
     return this.httpClient.post<any>(`${environment.API_URL}upload/pictures/`, formData);
   }
 
+  constructDownloadImageURI(UUID: string): string {
+    return `${environment.API_URL}download/pictures/${UUID}`+ "/"
+  }
+
+  downloadImage(UUID: string){
+    let url = this.constructDownloadImageURI(UUID)
+    return this.httpClient.get<Blob>(url);
+  }
+
   getPhotos(){
     return this.httpClient.get<Photo[]>(`${environment.API_URL}photos/`);
   }
