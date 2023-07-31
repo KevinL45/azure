@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 })
 export class ImageModelComponent {
   photos: Photo[] = [];
-  tags: Tag[]=[];
 
   constructor(private apiService: ApiService, private http: HttpClient, private router: Router) {
   }

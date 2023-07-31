@@ -25,6 +25,10 @@ urlpatterns = [
     path('add_photo/',views.create_photo , name="Ajouter une photo"),
     path('remove_photo/<int:id>/',views.delete_photo, name="Supprimer une photo"),
     path('update_photo/<int:id>/',views.update_photo, name="Modifier une photo"),
+    path('random_photos/',views.random_photos, name="Liste des photos"),
+    path('ten_photos/',views.ten_photos, name="Liste des photos"),
+
+
 
     path('tags-available/', views.get_available_tags, name= "Liste des tags par occurence"),
     path('tags/',views.list_tags, name="Liste des tags"),
