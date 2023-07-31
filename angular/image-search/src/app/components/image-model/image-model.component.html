@@ -9,7 +9,7 @@
             <img [src]="photo.picture" class="card-img-top">
           </a>
           <div class="card-body">
-            <button class="btn btn-primary" (click)="download(photo.picture,photo.name)">Télécharger</button>
+            <button class="btn btn-primary" (click)="download(photo.picture, photo.name)">Télécharger</button>
             <button class="btn btn-danger" (click)="delete_picture(photo.id)">Supprimer</button>
            <div *ngFor="let tag of photo.tags">
             <p class="card-text">{{tag.name}}</p>
