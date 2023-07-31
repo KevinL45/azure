@@ -22,6 +22,15 @@ def ten_photos(request):
 @api_view(['GET'])
 def list_photos(request):
         photo = Photo.objects.all()
+        filters = request.query_params.get('filter', None)
+        if filters != None:
+            print(filters)
+            # photo = Photo.objects.filter()
+            # from itertools import chain
+
+ 
+            # courses=chain(q2,q1)
+
         serializer = PhotoSerializer(photo, many=True)
         return JsonResponse(serializer.data, safe=False)
 
