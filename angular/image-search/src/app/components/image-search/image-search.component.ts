@@ -150,7 +150,7 @@ export class ImageSearchComponent {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.allFruits.filter(fruit => fruit.toLowerCase().includes(filterValue));
+    return this.all_tags.filter(fruit => fruit.toLowerCase().includes(filterValue));
   }
 
 
