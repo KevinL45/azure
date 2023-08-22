@@ -19,18 +19,24 @@ def ten_photos(request):
         serializer = PhotoSerializer(photo, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+# https://docs.djangoproject.com/fr/2.2/topics/db/examples/many_to_many/
+# https://docs.djangoproject.com/fr/2.2/topics/db/examples/many_to_many/
 @api_view(['GET'])
 def list_photos(request):
         photo = Photo.objects.all()
         filters = request.query_params.get('filter', None)
         if filters != None:
+            filters = filters.replace('"','').strip()
             print(filters)
-            # photo = Photo.objects.filter()
-            # from itertools import chain
-
- 
-            # courses=chain(q2,q1)
-
+            filters_parsed = filters.split(",")
+            filters_to_search = []
+            for filter_parsed in filters_parsed:
+                print(filter_parsed)
+                filters_to_search.append(filter_parsed)
+            photo = Photo.objects.filter(tags__name__in=filters_to_search)
+            for filter_parsed in photo:
+                print(filter_parsed)
+            # print(photo)
         serializer = PhotoSerializer(photo, many=True)
         return JsonResponse(serializer.data, safe=False)
 
