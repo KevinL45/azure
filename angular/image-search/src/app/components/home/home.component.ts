@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css',
               '../image-model/image-model.component.css',]
 })
+
+
 export class HomeComponent {
   ten_photos: Photo[] = [];
   random_photos: Photo[] = [];
@@ -23,6 +25,7 @@ export class HomeComponent {
   ngOnInit(): void {
     this.apiService.getTenPhtos().subscribe(photos => {
       this.ten_photos = photos;
+      // this.ten_photos = (this.ten_photos.map(photo => photo.color = Math.floor(Math.random()*16777215).toString(16)))
     });
 
     this.apiService.getRandomPhotos().subscribe(photos => {

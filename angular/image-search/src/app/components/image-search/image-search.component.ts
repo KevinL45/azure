@@ -10,6 +10,7 @@ import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
 interface AvailableTag {
   name: string,
   occurence: string
+  color?: string
 }
 @Component({
   selector: 'app-image-search',
@@ -54,6 +55,7 @@ export class ImageSearchComponent {
         if (datas != null)  {
           this.available_tags = (datas as AvailableTag[]).map((data: AvailableTag) =>  {
             // data.occurence = parseInt((data.occurence as string))
+            data.color = "#" + Math.floor(Math.random()*16777215).toString(16);
             console.log(data)
             return data
           })
@@ -65,7 +67,10 @@ export class ImageSearchComponent {
       if (allTags != null) {
         let availableTagsResults: any = allTags;
         let datas = availableTagsResults['available-tags']
-        this.all_tags = datas.map((data: any) => data.name)
+        this.all_tags = datas.map((data: any) => {
+          return data.name
+          // data.color = Math.floor(Math.random()*16777215).toString(16);
+        })
       }
     })
     // this.apiService.getPhotos().subscribe(photos => {

@@ -21,7 +21,9 @@
               <button class="btn btn-success" (click)="download(photo.picture,photo.name)"><i class="bi bi-box-arrow-down"></i></button>
               <button class="btn btn-danger" (click)="delete_picture(photo.id)"><i class="bi bi-trash-fill"></i></button>
              <div *ngFor="let tag of photo.tags">
-              <span>{{tag.name}}</span>
+             <mat-chip>
+                {{tag.name}}
+            </mat-chip>
             </div>
             </div>
           </div>

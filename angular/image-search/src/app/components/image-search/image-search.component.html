@@ -26,7 +26,7 @@
   </mat-form-field>
 </form>
 <mat-chip-listbox aria-label="tag selection">
-  <mat-chip *ngFor="let tag of available_tags">
+  <mat-chip *ngFor="let tag of available_tags" [ngStyle]="{'border-color': tag.color}">
   {{tag.name}} ({{tag.occurence}})
   </mat-chip>
 </mat-chip-listbox>
