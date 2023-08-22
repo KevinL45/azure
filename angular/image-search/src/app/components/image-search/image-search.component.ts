@@ -35,8 +35,9 @@ export class ImageSearchComponent {
   separatorKeysCodes: number[] = [0, 1];
   fruitCtrl = new FormControl('');
   filteredFruits: Observable<string[]>;
-  fruits: string[] = ['Lemon'];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  // fruits: string[] = ['Lemon'];
+  fruits: string[] = [];
+  allFruits: string[] = [];
   tagsAvailable: AvailableTag[] = []
   // constructor(private apiService: ApiService) { }
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> | undefined;
@@ -100,6 +101,7 @@ export class ImageSearchComponent {
     }
     this.tags_to_search.push(tag_name)
     console.log(this.tags_to_search)
+    this.fruits = this.tags_to_search
     // this.refreshPage()
     this.ngOnInit()
     // this.api
@@ -128,12 +130,21 @@ export class ImageSearchComponent {
 
       this.announcer.announce(`Removed ${fruit}`);
     }
+    this.ngOnInit()
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
+
     // this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
+    let tag_selected = event.option.viewValue
+    console.log(tag_selected)
+
+    this.tags_to_search = this.fruits
+    this.fruits.push(event.option.viewValue);
+    this.tags_to_search = this.fruits
+
+    this.ngOnInit()
   }
 
   private _filter(value: string): string[] {
