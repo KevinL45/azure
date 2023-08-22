@@ -6,6 +6,8 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Observable, map, startWith } from 'rxjs';
 import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
+import { Router } from '@angular/router';
+import { Photo } from '../model/photo';
 
 interface AvailableTag {
   name: string,
@@ -23,7 +25,8 @@ export class ImageSearchComponent {
   available_tags: AvailableTag[] = []
   all_tags: string[] = []
 
-  recherche:String =""
+  photos: Photo[] = []
+  tags_to_search: string[]
 
 
 
@@ -40,11 +43,16 @@ export class ImageSearchComponent {
 
   announcer = inject(LiveAnnouncer);
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private router: Router) {
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
     );
+    this.tags_to_search = []
+  }
+
+  ngOnChanges(): void {
+
   }
 
   ngOnInit(): void {
@@ -73,11 +81,30 @@ export class ImageSearchComponent {
         })
       }
     })
+
+    this.apiService.getPhotos(this.tags_to_search).subscribe(photos => {
+      this.photos = photos;
+      // this.ten_photos = (this.ten_photos.map(photo => photo.color = Math.floor(Math.random()*16777215).toString(16)))
+    });
     // this.apiService.getPhotos().subscribe(photos => {
     //   this.tagsAvailable = photos.flatMap(x => x.tags.map(x => x.name))
     //   console.log(this.tagsAvailable)
     // });
   }
+
+  onClickChip(tag_name: string, flush: boolean = true): void {
+    // this.photos =
+    if (flush) {
+      console.log("FLUSHHHHHHHHHHH!!!")
+      this.tags_to_search = []
+    }
+    this.tags_to_search.push(tag_name)
+    console.log(this.tags_to_search)
+    // this.refreshPage()
+    this.ngOnInit()
+    // this.api
+  }
+
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -114,6 +141,37 @@ export class ImageSearchComponent {
 
     return this.allFruits.filter(fruit => fruit.toLowerCase().includes(filterValue));
   }
+
+
+  ///////////////////////////////////////////////////
+
+
+  download(url_image:string, name_image:string):void{
+    const link = document.createElement('a');
+    link.href = this.apiService.constructDownloadImageURI(name_image);
+    link.download = ` ${name_image}.jpeg`;
+    link.click();
+  }
+
+  delete_picture(id:number){
+    console.log("L'id de la photo :"+ id)
+    this.apiService.deletePhoto(id).subscribe({
+      next: (response) => {
+        console.log('Photo supprimé');
+        this.refreshPage()
+      },
+      error: (error) => {
+        console.error('Erreur lors de la requête DELETE : ', error);
+      }
+    });
+  }
+
+  refreshPage() {
+  const currentUrl = this.router.url;
+  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigate([currentUrl]);
+  });
+}
 
   ////////////////////////////////
 

@@ -2,6 +2,28 @@
   width: 100%;
 }
 
-mat-chip {
+.container {
+  justify-content: center;
+  height: 80vh;
+}
+
+.center-slide-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* This ensures the image takes the full height of the slide container */
+}
+
+.center-slide-image img {
+  max-width: 800px; /* Set your desired maximum width */
+  max-height: 400px; /* Set your desired maximum height */
+  margin: 0 auto; /* To center the slide horizontally */
+}
+
+.mat-chip {
+  margin-top: 2px;
+}
+
+.custom-mat-chip {
   border: 3px solid
 }

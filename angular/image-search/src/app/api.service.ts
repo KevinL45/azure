@@ -38,8 +38,20 @@ export class ApiService {
     return this.httpClient.get<Blob>(url);
   }
 
-  getPhotos(){
-    return this.httpClient.get<Photo[]>(`${environment.API_URL}photos/`);
+  getPhotos(tags_to_filter?: string[]){
+    let url = `${environment.API_URL}photos/`
+    if (tags_to_filter != undefined && tags_to_filter.length != 0) {
+      let filter_reduced = tags_to_filter.reduce((old, current_tag) => {
+        console.log(current_tag)
+        return old + current_tag + ','
+     },"")
+    //  let filter_reduced = tags_to_filter
+     console.log(filter_reduced)
+     filter_reduced = "?filter=" + filter_reduced
+     url = url + filter_reduced
+     console.log(url)
+    }
+    return this.httpClient.get<Photo[]>(url);
   }
 
   getRandomPhotos(){
