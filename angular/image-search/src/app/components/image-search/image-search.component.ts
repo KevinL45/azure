@@ -107,6 +107,10 @@ export class ImageSearchComponent {
     // this.api
   }
 
+  onClickSlider(event: any): void{
+    console.log("click slider")
+  }
+
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();

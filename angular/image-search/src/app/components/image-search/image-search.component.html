@@ -2,6 +2,10 @@
 
 <div>
   <div>
+  <label class="switch">
+    <input type="checkbox" (change)="onClickSlider($event)">
+  <span class="slider round"></span>
+</label>
   <h2>Recherche des images par tags</h2>
   <form>
   <mat-form-field class="example-chip-list">
@@ -14,7 +18,7 @@
         </button>
       </mat-chip-row>
     </mat-chip-grid>
-    <input placeholder="New Fruit..." #fruitInput [formControl]="fruitCtrl"
+    <input placeholder="New Tag..." #fruitInput [formControl]="fruitCtrl"
       [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       (matChipInputTokenEnd)="add($event)"/>
