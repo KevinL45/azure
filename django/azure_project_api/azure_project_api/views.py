@@ -13,6 +13,13 @@ from django.db.models import Count
 import json
 from random import sample
 
+from enum import Enum
+
+class SEARCH_MODE(Enum):
+     INCLUDE = "INCLUDE"
+     EXCLUDE = "EXCLUDE"
+
+
 @api_view(['GET'])
 def ten_photos(request):
         photo = Photo.objects.all()[:8]
@@ -22,8 +29,14 @@ def ten_photos(request):
 # https://docs.djangoproject.com/fr/2.2/topics/db/examples/many_to_many/
 # https://docs.djangoproject.com/fr/2.2/topics/db/examples/many_to_many/
 @api_view(['GET'])
-def list_photos(request):
+def list_photos(request, search_mode = SEARCH_MODE.INCLUDE):
         photo = Photo.objects.all()
+        search_mode = request.query_params.get('search_mode', '')
+        try:
+            search_mode = SEARCH_MODE(search_mode.upper())
+        except: 
+            search_mode = SEARCH_MODE.INCLUDE
+        print(search_mode.value)
         filters = request.query_params.get('filter', None)
         if filters != None:
             filters = filters.replace('"','').strip()
