@@ -92,3 +92,12 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.include_selected {
+  background-color: #2196F3;
+}
+
+.exclude_selected {
+  background-color: #ccc;
+}
+

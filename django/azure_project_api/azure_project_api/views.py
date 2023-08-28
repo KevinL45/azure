@@ -9,6 +9,7 @@ from django.http import FileResponse, HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from django.db.models import Count
+from django.db.models import Q
 
 import json
 from random import sample
@@ -43,10 +44,20 @@ def list_photos(request, search_mode = SEARCH_MODE.INCLUDE):
             # print(filters)
             filters_parsed = filters.split(",")
             filters_to_search = []
-            for filter_parsed in filters_parsed:
-                # print(filter_parsed)
-                filters_to_search.append(filter_parsed)
-            photo = Photo.objects.filter(tags__name__in=filters_to_search)
+            if search_mode == SEARCH_MODE.INCLUDE:
+                for filter_parsed in filters_parsed:
+                    # print(filter_parsed)
+                    filters_to_search.append(filter_parsed)
+                photo = Photo.objects.filter(tags__name__in=filters_to_search)
+            elif search_mode == SEARCH_MODE.EXCLUDE:
+                try:
+                    for filter_parsed in filters_parsed:
+                        filters_to_search = []
+                        filters_to_search.append(filter_parsed) 
+                        photo = Photo.objects.filter(Q(name='Mihail') & Q(age=20)tags__name__in=filters_to_search)
+                except Exception as error:
+                    print(error)
+                    photo = []
             # for filter_parsed in photo:
             #     print(filter_parsed)
         serializer = PhotoSerializer(photo, many=True)

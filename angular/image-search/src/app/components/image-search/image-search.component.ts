@@ -90,7 +90,7 @@ export class ImageSearchComponent {
       }
     })
 
-    this.apiService.getPhotos(this.tags_to_search).subscribe(photos => {
+    this.apiService.getPhotos(this.tags_to_search, this.search_mode_selected).subscribe(photos => {
       this.photos = photos;
       // this.ten_photos = (this.ten_photos.map(photo => photo.color = Math.floor(Math.random()*16777215).toString(16)))
     });
@@ -127,6 +127,7 @@ export class ImageSearchComponent {
     this.search_mode_enabled = !this.search_mode_enabled
     this.search_mode_selected = (this.search_mode_enabled == true ? this.search_mode[0]:this.search_mode[1])
     this.fruits[0] = this.search_mode_selected
+    this.ngOnInit()
     // this.renderChip()
   }
 
