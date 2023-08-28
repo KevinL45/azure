@@ -3,17 +3,18 @@
 <div>
   <div>
   <label class="switch">
-    <input type="checkbox" (change)="onClickSlider($event)">
+    <input type="checkbox" [checked]="true" (change)="onClickSlider($event)">
   <span class="slider round"></span>
 </label>
+<span>  Options de recherche</span>
   <h2>Recherche des images par tags</h2>
   <form>
   <mat-form-field class="example-chip-list">
     <mat-label>Tags à rechercher</mat-label>
     <mat-chip-grid #chipGrid aria-label="Fruit selection">
-      <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+      <mat-chip-row *ngFor="let fruit of fruits, index as i" [ngStyle]= "i == 0 ? {'background-color': '#2196F3'}:{'background-color': 'defaut'}" (removed)="remove(fruit)">
         {{fruit}}
-        <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+        <button *ngIf="i != 0" matChipRemove [attr.aria-label]="'remove ' + fruit">
           <mat-icon>cancel</mat-icon>
         </button>
       </mat-chip-row>

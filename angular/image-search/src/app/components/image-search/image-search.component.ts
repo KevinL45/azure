@@ -28,6 +28,11 @@ export class ImageSearchComponent {
   photos: Photo[] = []
   tags_to_search: string[]
 
+  search_mode=['INCLUDE','EXCLUDE']
+  search_mode_enabled = false
+  search_mode_selected = this.search_mode[0]
+  old_search_mode_selected = ""
+
 
 
 
@@ -50,6 +55,8 @@ export class ImageSearchComponent {
       map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
     );
     this.tags_to_search = []
+    this.tags_to_search.push(this.search_mode_selected)
+    this.fruits = this.tags_to_search
   }
 
   ngOnChanges(): void {
@@ -87,6 +94,9 @@ export class ImageSearchComponent {
       this.photos = photos;
       // this.ten_photos = (this.ten_photos.map(photo => photo.color = Math.floor(Math.random()*16777215).toString(16)))
     });
+
+
+
     // this.apiService.getPhotos().subscribe(photos => {
     //   this.tagsAvailable = photos.flatMap(x => x.tags.map(x => x.name))
     //   console.log(this.tagsAvailable)
@@ -102,13 +112,22 @@ export class ImageSearchComponent {
     this.tags_to_search.push(tag_name)
     console.log(this.tags_to_search)
     this.fruits = this.tags_to_search
+    let fruits_render = []
+    fruits_render.push(this.search_mode_selected)
+    this.fruits = fruits_render.concat(this.tags_to_search)
     // this.refreshPage()
     this.ngOnInit()
     // this.api
   }
 
+
+
   onClickSlider(event: any): void{
     console.log("click slider")
+    this.search_mode_enabled = !this.search_mode_enabled
+    this.search_mode_selected = (this.search_mode_enabled == true ? this.search_mode[0]:this.search_mode[1])
+    this.fruits[0] = this.search_mode_selected
+    // this.renderChip()
   }
 
 
