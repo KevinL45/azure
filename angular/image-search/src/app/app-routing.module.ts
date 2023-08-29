@@ -4,6 +4,7 @@ import {ImageSearchComponent} from "./components/image-search/image-search.compo
 import { FormPictureUploadComponent } from './components/form-picture-upload/form-picture-upload.component';
 import { HomeComponent} from "./components/home/home.component";
 import { ImageModelComponent } from "./components/image-model/image-model.component";
+import { ImageDetailComponent } from './components/image-detail/image-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -11,7 +12,7 @@ const routes: Routes = [
   { path: 'search', component: ImageSearchComponent },
   // { path: 'upload', component: ImageUploadComponent },
   { path: 'upload', component: FormPictureUploadComponent },
-  { path: 'image_detail', component: ImageModelComponent}
+  { path: 'image_detail/:id', component: ImageDetailComponent}
   // other routes...
 ];
 

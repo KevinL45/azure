@@ -38,13 +38,14 @@ export class ImageModelComponent {
     this.apiService.deletePhoto(id).subscribe({
       next: (response) => {
         console.log('Photo supprimé');
-        this.refreshPage()
+        //this.refreshPage()
       },
       error: (error) => {
         console.error('Erreur lors de la requête DELETE : ', error);
       }
     });
   }
+
 
   refreshPage() {
   const currentUrl = this.router.url;

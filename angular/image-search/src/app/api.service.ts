@@ -51,7 +51,7 @@ export class ApiService {
   }
 
   getPhoto(id:number){
-    return this.httpClient.get<Photo>(`${environment.API_URL}photos/${id}/`);
+    return this.httpClient.get<Photo>(`${environment.API_URL}photo/${id}/`);
   }
 
   getTags(){

@@ -18,13 +18,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import {MatAutocompleteSelectedEvent, MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ImageDetailComponent } from './components/image-detail/image-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ImageModelComponent,
     ImageSearchComponent,
-    HomeComponent
+    HomeComponent,
+    ImageDetailComponent
   ],
   imports: [
     BrowserModule,
