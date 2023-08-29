@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('photos/',views.list_photos, name="Liste des photos"),
+    path('photos/',views.list_photos, name="filtre Liste des photos"),
     path('photo/<int:id>/',views.getPhoto , name="Photo"),
     path('add_photo/',views.create_photo , name="Ajouter une photo"),
     path('remove_photo/<int:id>/',views.delete_photo, name="Supprimer une photo"),
@@ -30,7 +31,7 @@ urlpatterns = [
 
 
 
-    path('tags-available/', views.get_available_tags, name= "Liste des tags par occurence"),
+    path('tags-available/<int:max_tags>/', views.get_available_tags, name= "Liste des tags par occurence / poularité"),
     path('tags/',views.list_tags, name="Liste des tags"),
     path('tag/<int:id>/',views.getTag , name="Tag"),
     path('add_tag/',views.create_tag , name="Ajouter un tag"),

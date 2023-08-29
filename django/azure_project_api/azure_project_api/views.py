@@ -1,3 +1,4 @@
+
 from rest_framework import status
 
 from .pictures_service import PictureService
@@ -8,9 +9,17 @@ from django.http import FileResponse, HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from django.db.models import Count
+from django.db.models import Q
 
 import json
 from random import sample
+
+from enum import Enum
+
+class SEARCH_MODE(Enum):
+     INCLUDE = "INCLUDE"
+     EXCLUDE = "EXCLUDE"
+
 
 @api_view(['GET'])
 def ten_photos(request):
@@ -18,9 +27,39 @@ def ten_photos(request):
         serializer = PhotoSerializer(photo, many=True)
         return JsonResponse(serializer.data, safe=False)
 
+# https://docs.djangoproject.com/fr/2.2/topics/db/examples/many_to_many/
+# https://docs.djangoproject.com/fr/2.2/topics/db/examples/many_to_many/
 @api_view(['GET'])
-def list_photos(request):
+def list_photos(request, search_mode = SEARCH_MODE.INCLUDE):
         photo = Photo.objects.all()
+        search_mode = request.query_params.get('search_mode', '')
+        try:
+            search_mode = SEARCH_MODE(search_mode.upper())
+        except: 
+            search_mode = SEARCH_MODE.INCLUDE
+        print(search_mode.value)
+        filters = request.query_params.get('filter', None)
+        if filters != None:
+            filters = filters.replace('"','').strip()
+            # print(filters)
+            filters_parsed = filters.split(",")
+            filters_to_search = []
+            if search_mode == SEARCH_MODE.INCLUDE:
+                for filter_parsed in filters_parsed:
+                    # print(filter_parsed)
+                    filters_to_search.append(filter_parsed)
+                photo = Photo.objects.filter(tags__name__in=filters_to_search)
+            elif search_mode == SEARCH_MODE.EXCLUDE:
+                try:
+                    for filter_parsed in filters_parsed:
+                        filters_to_search = []
+                        filters_to_search.append(filter_parsed) 
+                        photo = Photo.objects.filter(Q(name='Mihail') & Q(age=20)tags__name__in=filters_to_search)
+                except Exception as error:
+                    print(error)
+                    photo = []
+            # for filter_parsed in photo:
+            #     print(filter_parsed)
         serializer = PhotoSerializer(photo, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -92,14 +131,22 @@ def getTag(request,id):
         return JsonResponse(serializer.data, safe=False)
 
 @api_view(['GET'])
-def get_available_tags(request):
-        # tag = Tag.objects.filter(id=id)
-        # .values().annotate(ocurrence=Count('name')).order_by('name')
-        tag = Tag.objects.values('name').distinct().annotate(ocurrence=Count('name'))
+def get_available_tags(request, max_tags=10):
+        tags: [] = []
+        class TagOccurence:
+            name =  "",
+            occurence = 0
+
+        try:
+            tags_temp: [] = Tag.objects.values('name').distinct() \
+                .annotate(occurence=Count('name')) \
+                .order_by('-occurence')[:max_tags]
+            for tag_temp in tags_temp:
+                tags.append(tag_temp)
+        except:
+             print('error')
         
-        # print(tag[0])
-        serializer = TagOcurrenceSerializer(tag, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse({'available-tags': tags}, safe=False)
 
 @api_view(['GET','POST'])
 def create_tag(request):

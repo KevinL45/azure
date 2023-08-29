@@ -17,6 +17,10 @@
   margin: 0 auto; /* To center the slide horizontally */
 }
 
+mat-chip {
+  margin-top: 2px;
+}
+
 
 
 

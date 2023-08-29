@@ -38,8 +38,30 @@ export class ApiService {
     return this.httpClient.get<Blob>(url);
   }
 
-  getPhotos(){
-    return this.httpClient.get<Photo[]>(`${environment.API_URL}photos/`);
+  getPhotos(tags_to_filter?: string[], search_mode?: string){
+    let url = `${environment.API_URL}photos/`
+    if (tags_to_filter != undefined && tags_to_filter.length != 0) {
+      let filter_reduced = tags_to_filter.reduce((old, current_tag) => {
+        console.log(current_tag)
+        let result = old
+        if (current_tag!= "INCLUDE" && current_tag != "EXCLUDE") {
+          result += current_tag + ','
+        }
+        return result
+     },"")
+    //  let filter_reduced = tags_to_filter
+     console.log(filter_reduced)
+     if (filter_reduced != undefined) {
+        filter_reduced = "?filter=" + filter_reduced
+     }
+     filter_reduced = filter_reduced.replace(/,*$/, '')
+     if (search_mode != undefined) {
+        search_mode = "&search_mode=" + search_mode
+     }
+     url = url + filter_reduced + search_mode
+     console.log(url)
+    }
+    return this.httpClient.get<Photo[]>(url);
   }
 
   getRandomPhotos(){
@@ -56,6 +78,10 @@ export class ApiService {
 
   getTags(){
     return this.httpClient.get<Tag[]>(`${environment.API_URL}tags/`);
+  }
+
+  getAvailableTags(maxTags: number= 10) {
+    return this.httpClient.get<string>(`${environment.API_URL}tags-available/${maxTags}/`);
   }
 
   getTag(id:number){

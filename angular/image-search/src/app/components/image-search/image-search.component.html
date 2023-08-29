@@ -2,32 +2,64 @@
 
 <div>
   <div>
+  <label class="switch">
+    <input type="checkbox" [checked]="true" (change)="onClickSlider($event)">
+  <span class="slider round"></span>
+</label>
+<span>  Options de recherche</span>
   <h2>Recherche des images par tags</h2>
   <form>
   <mat-form-field class="example-chip-list">
     <mat-label>Tags à rechercher</mat-label>
     <mat-chip-grid #chipGrid aria-label="Fruit selection">
-      <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+      <mat-chip-row *ngFor="let fruit of fruits, index as i" [ngStyle]= "i == 0 ? {'background-color': '#2196F3'}:{'background-color': 'defaut'}" (removed)="remove(fruit)">
         {{fruit}}
-        <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+        <button *ngIf="i != 0" matChipRemove [attr.aria-label]="'remove ' + fruit">
           <mat-icon>cancel</mat-icon>
         </button>
       </mat-chip-row>
     </mat-chip-grid>
-    <input placeholder="New Fruit..." #fruitInput [formControl]="fruitCtrl"
+    <input placeholder="New Tag..." #fruitInput [formControl]="fruitCtrl"
       [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
       (matChipInputTokenEnd)="add($event)"/>
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-        {{fruit}}
-      </mat-option>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+      {{fruit}}
+    </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 </form>
+<mat-chip-listbox aria-label="tag selection">
+  <mat-chip class="custom-mat-chip" *ngFor="let tag of available_tags" [ngStyle]="{'border-color': tag.color}" (click)="onClickChip(tag.name)">
+  {{tag.name}} ({{tag.occurence}})
+  </mat-chip>
+</mat-chip-listbox>
 </div>
-  <h2>Recherche des images</h2>
-
+  <h2>Recherche des images / {{photos != undefined ? photos.length : 0}} {{(photos != undefined && photos.length == 1) ? "disponible" : "disponibles"}}</h2>
+  <div class="container">
+    <div  class="grid-container">
+        <div  *ngFor="let photo of photos" class="grid-item">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card" style="width: 18rem;">
+                  <img [src]="photo.picture" class="card-img-top">
+                <div class="card-body">
+                  <button class="btn btn-success" (click)="download(photo.picture,photo.name)"><i class="bi bi-box-arrow-down"></i></button>
+                  <button class="btn btn-danger" (click)="delete_picture(photo.id)"><i class="bi bi-trash-fill"></i></button>
+                <div *ngFor="let tag of photo.tags">
+                <mat-chip class="mat-chip" (click)="onClickChip(tag.name)">
+                    {{tag.name}}
+                </mat-chip>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/><br/>
+      </div>
+    </div>
+  </div>
 </div>
 
 
