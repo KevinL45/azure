@@ -54,7 +54,8 @@ def list_photos(request, search_mode = SEARCH_MODE.INCLUDE):
                     for filter_parsed in filters_parsed:
                         filters_to_search = []
                         filters_to_search.append(filter_parsed) 
-                        photo = Photo.objects.filter(Q(name='Mihail') & Q(age=20)tags__name__in=filters_to_search)
+                        # Q(name='Mihail') & Q(age=20)tags__name__in=filters_to_search
+                        photo = Photo.objects.filter(tags__name__in=filters_to_search)
                 except Exception as error:
                     print(error)
                     photo = []
